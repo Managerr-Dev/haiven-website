@@ -6,6 +6,7 @@ import Image from "next/image";
 import Navigation from "./Navigation";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
+import NavbarDownload from "./NavbarDownload";
 
 const Navbar = () => {
 	const pathname = usePathname();
@@ -57,14 +58,7 @@ const Navbar = () => {
 
 					{/* button */}
 
-					<button
-						className={cn(
-							"py-4 px-10 bg-accent-green font-semibold rounded-[10.18px] transition-colors",
-							isLightPage && !isScrolled ? "text-white" : "text-haiven-blue",
-						)}
-					>
-						Download App
-					</button>
+					<NavbarDownload isLightPage={isLightPage} isScrolled={isScrolled} />
 				</div>
 			</div>
 		</div>

@@ -22,7 +22,7 @@ const list = [
 
 const Hero = () => {
 	return (
-		<div className="bg-white relative font-sans pb-[146px] xl:pt-[167px]">
+		<div className="bg-white relative font-sans pb-[146px] pt-[167px]">
 			<div className="relative max-w-[1071px] mx-auto gap-[27.99px]  bg-white flex flex-col items-center text-center">
 				<Image
 					src="/images/haiven-leaf.svg"
@@ -68,14 +68,14 @@ const Hero = () => {
 				<SectionBadge text="Contact Us" />
 
 				<h1 className="font-sora-sans font-bold text-[40.73px] max-w-[80%] leading-[100%] align-middle uppercase text-haiven-blue">
-					We’re here to <span className="text-[#FF8900]">assist</span>
+					We&apos;re here to <span className="text-[#FF8900]">assist</span>
 				</h1>
 
 				<p className="font-regular text-[16.97px] text-center leading-[150%] mb-[84.5px]">
 					Let us know how we can help make your community experience better.
 				</p>
 
-				<div className="grid sm:grid-cols-3 justify-between  w-full max-w-[795px] mx-auto">
+				<div className="grid grid-cols-2 sm:grid-cols-3 justify-between gap-4 w-full max-w-[795px] mx-auto">
 					{list.map((item, index) => (
 						<Card key={index} {...item} />
 					))}
@@ -98,7 +98,7 @@ function Card({ title, icon, value }: Props) {
 				<Image src={icon} alt={title} width={27.15} height={27.15} />
 			</div>
 			<p className="">{title}</p>
-			<a className="" href={value}>
+			<a className="hover:underline" href={value}>
 				{value.split(":")[1]}
 			</a>
 		</div>

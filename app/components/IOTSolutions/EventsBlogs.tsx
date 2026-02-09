@@ -32,7 +32,7 @@ const list = [
 
 const EventsBlogs = () => {
 	return (
-		<section className="py-[84.83px]">
+		<section className="py-[84.83px] px-4">
 			<div className="max-w-[1112.94px] mx-auto font-sans ">
 				<div className="">
 					<SectionBadge text="Other Events & Blog Post" />

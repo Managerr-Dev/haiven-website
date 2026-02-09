@@ -12,7 +12,7 @@ const page = () => {
 					<ContactForm />
 				</div>
 				<div className="">
-					<Faq />
+					<Faq variant="normal" />
 				</div>
 			</section>
 		</div>

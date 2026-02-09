@@ -97,7 +97,7 @@ const Navigation = ({ className, isScrolled, variant = "navbar" }: Props) => {
 						Features
 					</NavigationMenuTrigger>
 					<NavigationMenuContent>
-						<ul className="grid w-[400px] gap-2 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
+						<ul className="grid w-[400px] gap-2 max-w-[300px]">
 							{features.map((feature) => (
 								<ListItem
 									key={feature.title}

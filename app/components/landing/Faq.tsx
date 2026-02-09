@@ -91,7 +91,7 @@ const Faq = ({ variant }: { variant: "light" | "normal" }) => {
 	return (
 		<section
 			className={cn(
-				"bg-haiven-blue py-[137px] xl:px-[100px] font-sans",
+				"bg-haiven-blue py-[137px] px-4 xl:px-[100px] font-sans",
 				variant === "light" ? "bg-white" : "bg-haiven-blue",
 			)}
 		>

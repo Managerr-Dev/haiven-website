@@ -12,7 +12,7 @@ const list = [
 
 const Hero = () => {
 	return (
-		<div className="bg-white relative min-h-screen xl:min-h-[978px] xl:pt-[167px] font-sans pb-[146px]">
+		<div className="bg-white relative px-4 min-h-screen xl:min-h-[978px] pt-[167px] font-sans pb-[146px]">
 			<div className="max-w-[1071px] mx-auto gap-[27.99px] bg-white flex flex-col items-center text-center">
 				<SectionBadge text="IOT Solutions" />
 
@@ -27,7 +27,7 @@ const Hero = () => {
 					dashboards, and AI insights, we empower businesses and communities to
 					cut costs, improve safety, and optimize performance.
 				</p>
-				<div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
+				<div className="grid grid-cols-2 md:grid-cols-3 gap-4">
 					{list.map((item, index) => (
 						<div key={index} className="">
 							<Image

@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 
 const Footer = () => {
 	return (
-		<footer className="bg-[#FAFBFC] pt-[142.07px] pb-[87.95px] font-sans">
+		<footer className="bg-[#FAFBFC] px-4 pt-[142.07px] pb-[87.95px] font-sans">
 			<div className="max-w-[1129.53px] mx-auto">
 				<div className="flex flex-wrap justify-between items-start gap-4 mb-[29.61px]">
 					<div className="flex flex-col">

@@ -40,14 +40,14 @@ const AppPreview = () => {
 							</Link>
 						</div>
 					</div>
+					<Image
+						src="/images/app-preview.png"
+						alt="iphone with a preview of haiven mobile app"
+						width={659.23}
+						height={547.38}
+						className="absolute -top-[200px] -right-20 bottom-20"
+					/>
 				</div>
-				<Image
-					src="/images/app-preview.png"
-					alt="iphone with a preview of haiven mobile app"
-					width={659.23}
-					height={547.38}
-					className="absolute -top-[270px] right-20 bottom-20"
-				/>
 			</div>
 			<section className="grid grid-cols-8 gap-5">
 				{Array(8)

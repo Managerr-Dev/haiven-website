@@ -69,7 +69,7 @@ const list = [
 
 const WhatWeDo = () => {
 	return (
-		<section className="bg-haiven-blue py-[72px] xl:px-[104px]">
+		<section className="bg-haiven-blue px-4 py-[72px] xl:px-[104px]">
 			<div className="max-w-[1077px] mx-auto font-sans space-y-[165px]">
 				{list.map((item, i) => (
 					<Card {...item} key={i} index={i} />
@@ -93,14 +93,14 @@ function Card({ description, image, title, list, index }: Props) {
 		<div className="text-white font-sans">
 			<div
 				className={cn(
-					"flex gap-[25px] items-center",
+					"flex gap-[25px] items-center flex-wrap",
 					!isEven ? "flex-row-reverse" : "flex-row",
 				)}
 			>
-				<div className="basis-2/5">
+				<div className="md:basis-2/5 basis-full">
 					<Image src={image} alt={title} width={405} height={542} />
 				</div>
-				<div className={cn("basis-3/5 py-6")}>
+				<div className={cn("md:basis-3/5 basis-full py-6")}>
 					<div className="max-w-[555px] w-full space-y-[27.99px]">
 						<p
 							className={cn(
@@ -110,10 +110,10 @@ function Card({ description, image, title, list, index }: Props) {
 						>
 							{title}
 						</p>
-                        
-                        
-                        <p className="font-regular text-xl leading-[150%] text-[#FFFFFFB2]">{description}</p>
-                        
+
+						<p className="font-regular text-xl leading-[150%] text-[#FFFFFFB2]">
+							{description}
+						</p>
 
 						{list && (
 							<ul className="list-disc list-inside space-y-[27.99px]">
@@ -122,7 +122,9 @@ function Card({ description, image, title, list, index }: Props) {
 										<div className="size-[17px] rounded-full bg-white flex items-center justify-center">
 											<Check size={7.29} color="#13247E" />
 										</div>
-										<span className="font-medium text-lg text-white leading-[27px]">{item}</span>
+										<span className="font-medium text-lg text-white leading-[27px]">
+											{item}
+										</span>
 									</li>
 								))}
 							</ul>

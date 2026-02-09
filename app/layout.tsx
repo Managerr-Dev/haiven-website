@@ -3,6 +3,7 @@ import { Montserrat, Sora } from "next/font/google";
 import "./globals.css";
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
+import RecaptchaProvider from "./components/RecaptchaProvider";
 
 const montserratSans = Montserrat({
 	variable: "--font-montserrat-sans",
@@ -29,9 +30,11 @@ export default function RootLayout({
 			<body
 				className={`${montserratSans.variable} ${soraSans.variable} antialiased`}
 			>
-				<Navbar />
-				{children}
-				<Footer />
+				<RecaptchaProvider>
+					<Navbar />
+					{children}
+					<Footer />
+				</RecaptchaProvider>
 			</body>
 		</html>
 	);

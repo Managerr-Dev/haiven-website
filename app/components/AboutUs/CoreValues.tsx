@@ -31,7 +31,7 @@ const list = [
 const CoreValues = () => {
 	return (
 		<section className="pt-[54.22px] pb-[123.69px]">
-			<div className="px-[84.72px]">
+			<div className="px-4 lg:px-[84.72px]">
 				<div className="text-center flex flex-col items-center justify-center">
 					<SectionBadge text="Our Core Values" />
 					<h1 className="mt-[20.33px] font-bold text-[40.67px] max-w-[80%] leading-[100%] align-middle uppercase text-haiven-blue mb-[55.63px]">

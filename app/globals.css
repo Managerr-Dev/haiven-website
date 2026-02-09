@@ -3,6 +3,40 @@
 
 @custom-variant dark (&:is(.dark *));
 
+@layer utilities {
+	.text-balance {
+		text-wrap: balance;
+	}
+}
+
+@keyframes slideLeft {
+	from {
+		transform: translateX(0);
+	}
+	to {
+		transform: translateX(-200px);
+	}
+}
+
+@keyframes slideRight {
+	from {
+		transform: translateX(0);
+	}
+	to {
+		transform: translateX(200px);
+	}
+}
+
+@layer utilities {
+	.animate-slide-left {
+		animation: slideLeft 0.8s ease-in-out;
+	}
+
+	.animate-slide-right {
+		animation: slideRight 0.8s ease-in-out;
+	}
+}
+
 :root {
 	--accent-green: #1ed760;
 	--haiven-blue: #13247e;

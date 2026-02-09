@@ -10,8 +10,8 @@ const list = [
 
 const Hero = () => {
 	return (
-		<div className="bg-white relative min-h-screen xl:min-h-[978px]  font-sans pb-[146px]">
-			<div className="relative max-w-[1071px] mx-auto gap-[27.99px] xl:pt-[167px] bg-white flex flex-col items-center text-center">
+		<div className="bg-white relative min-h-screen xl:min-h-[978px] px-4 font-sans pb-[146px]">
+			<div className="relative max-w-[1071px] mx-auto gap-[27.99px] pt-[167px] bg-white flex flex-col items-center text-center">
 				<Image
 					src="/images/haiven-leaf.svg"
 					alt="decorative leaf"
