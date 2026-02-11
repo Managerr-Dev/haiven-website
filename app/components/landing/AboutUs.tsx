@@ -3,6 +3,7 @@ import SectionBadge from "./SectionBadge";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { ArrowUpRight } from "lucide-react";
+import Link from "next/link";
 
 const AboutUs = () => {
 	return (
@@ -39,7 +40,7 @@ const AboutUs = () => {
 					className="absolute -bottom-10 left-40"
 					preload={false}
 				/>
-				 <Image
+				<Image
 					src="/images/haiven-leaf.svg"
 					alt="decorative leaf"
 					width={126.8}
@@ -64,11 +65,12 @@ const AboutUs = () => {
 					we empower communities to live smarter, safer, and more comfortably
 				</p>
 
-				{/* TODO:Button */}
 				<div className="flex items-center justify-center mt-[23.75px]">
-					<Button className="h-auto px-[25.2px] py-[12.5px] flex items-center gap-1 text-[13.57px] font-medium text-accent-green leading-[20.36px] bg-white border-[0.8px] border-accent-green">
-						Learn More <ArrowUpRight />
-					</Button>
+					<Link href="/about-us">
+						<Button className="h-auto px-[25.2px] py-[12.5px] flex items-center gap-1 text-[13.57px] font-medium text-accent-green leading-[20.36px] bg-white border-[0.8px] border-accent-green hover:bg-accent-green hover:text-white cursor-pointer">
+							Learn More <ArrowUpRight />
+						</Button>
+					</Link>
 				</div>
 			</div>
 		</section>

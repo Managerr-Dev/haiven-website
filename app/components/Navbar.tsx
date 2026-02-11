@@ -68,10 +68,11 @@ const Navbar = () => {
 										? "/images/haiven-logo-blue.svg"
 										: "/images/haiven-logo-light.png"
 								}
-								width={256.08}
+								width={200.08}
 								height={70}
 								alt="Haiven Logo"
-								className="w-[100px] md:w-[180px] xl:w-[256px] h-auto"
+								loading="eager"
+								className="w-[100px] md:w-[180px] xl:w-[200px] h-auto"
 							/>
 						</Link>
 

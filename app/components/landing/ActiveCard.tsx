@@ -27,7 +27,7 @@ function ActiveCard({
 	return (
 		<div
 			className={cn(
-				"relative rounded-[84.83px] flex flex-col md:flex-row items-center justify-between pb-0 transition-all duration-1000 min-h-[500px] xl:w-full max-w-[1116.37px]",
+				"relative rounded-[84.83px] flex flex-col md:flex-row justify-between pb-0 transition-all duration-1000  xl:w-full max-w-[1116.37px] min-h-[460px] ",
 				isEven ? "md:flex-row" : "md:flex-row-reverse",
 				mainbgcolor,
 				isTransitioning ? "opacity-0" : "opacity-100",
@@ -50,7 +50,7 @@ function ActiveCard({
 
 			<div
 				className={cn(
-					"py-[80px] md:py-[166.27px] px-8 md:px-[77px] text-center md:text-left basis-full md:basis-auto z-10 transition-all duration-700 ease-in-out",
+					"py-[80px] flex items-center px-8 md:px-[77px] text-center md:text-left basis-full md:basis-auto z-10 transition-all duration-700 ease-in-out",
 					isTransitioning
 						? isEven
 							? "translate-x-[50px] opacity-0"
@@ -70,7 +70,7 @@ function ActiveCard({
 
 			<div
 				className={cn(
-					"pb-0 w-full md:w-auto h-full z-10 transition-all duration-700 ease-in-out",
+					"pb-0 w-full md:w-auto z-10 transition-all duration-700 ease-in-out",
 					isTransitioning
 						? isEven
 							? "-translate-x-[50px] opacity-0"
@@ -80,7 +80,7 @@ function ActiveCard({
 			>
 				<div
 					className={cn(
-						"flex items-center justify-center py-12 md:py-[105.47px] px-8 md:px-[72.95px] rounded-[40px] md:rounded-[84.83px] transition-all duration-500",
+						"flex items-center h-full justify-center py-12  px-8 md:px-[72.95px] rounded-[40px] md:rounded-[84.83px] transition-all duration-500",
 						accentColor,
 					)}
 				>

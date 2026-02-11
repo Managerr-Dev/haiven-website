@@ -19,7 +19,7 @@ const Hero = () => {
 						<span className="text-accent-green">One Place</span>
 					</h1>
 
-					<p className="text-white text-base lg:text-2xl font-light font-sora-sans">
+					<p className="text-white text-base lg:text-xl font-light font-sora-sans">
 						From digital access control to visitor management systems, utility
 						payments, and community engagement tools, our all-in-one platform
 						makes managing estates and gated communities and commercial centers
@@ -45,7 +45,7 @@ const Hero = () => {
 					src="/images/haiven_hero.webp"
 					fill
 					alt="high rise building"
-					priority
+					loading="eager"
 				/>
 			</div>
 		</div>

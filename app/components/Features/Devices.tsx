@@ -45,7 +45,7 @@ const Devices = ({
 	line,
 }: Props) => {
 	return (
-		<section className="px-4 md:px-6">
+		<section className="px-4 md:px-6 ">
 			<div
 				className={cn(
 					"bg-[#0086CF] flex flex-col py-[69px] max-w-[1103.17px] mx-auto xl:pl-[80.78px] min-h-[1203.31px] rounded-3xl xl:rounded-[84.15px]",
@@ -56,7 +56,7 @@ const Devices = ({
 					{sectionTitle}
 				</h2>
 
-				<div className="flex md:flex-row items-center justify-center xl:justify-start flex-col flex-1 gap-10">
+				<div className="flex md:flex-row  flex-col flex-1 gap-12">
 					<div className="relative">
 						<Image
 							src={device_1}
