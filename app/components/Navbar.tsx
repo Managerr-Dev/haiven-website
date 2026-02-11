@@ -52,16 +52,16 @@ const Navbar = () => {
 		<>
 			<div
 				className={cn(
-					"fixed top-0 left-0 w-full z-[100] transition-all duration-300 font-sans",
+					"fixed top-0 left-0 w-full z-100 transition-all duration-300 font-sans",
 					isScrolled || isMenuOpen
 						? "bg-haiven-blue/60 backdrop-blur-lg border-b border-white/10 py-2"
 						: "py-4",
 				)}
 			>
-				<div className="max-w-[1312px] mx-auto px-6 xl:px-0">
+				<div className="max-w-[1312px] mx-auto px-6">
 					<div className="flex items-center justify-between">
 						{/* logo */}
-						<Link href="/" className="relative z-[110]">
+						<Link href="/" className="relative z-110">
 							<Image
 								src={
 									isLightPage && !isScrolled && !isMenuOpen
@@ -91,7 +91,7 @@ const Navbar = () => {
 						{/* Mobile toggle button */}
 						<button
 							className={cn(
-								"lg:hidden p-2 z-[110] transition-colors",
+								"lg:hidden p-2 z-110 transition-colors",
 								isLightPage && !isScrolled && !isMenuOpen
 									? "text-haiven-blue"
 									: "text-white",
