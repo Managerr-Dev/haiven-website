@@ -12,16 +12,16 @@ const list = [
 
 const Hero = () => {
 	return (
-		<div className="bg-white relative px-4 min-h-screen xl:min-h-[978px] pt-[167px] font-sans pb-[146px]">
+		<div className="bg-white relative px-4 md:px-6  min-h-screen xl:min-h-[978px] pt-[167px] font-sans pb-[146px]">
 			<div className="max-w-[1071px] mx-auto gap-[27.99px] bg-white flex flex-col items-center text-center">
 				<SectionBadge text="IOT Solutions" />
 
-				<h1 className="font-bold text-[40.72px] max-w-[80%] leading-[100%] align-middle uppercase text-haiven-blue">
+				<h1 className="font-bold text-3xl md:text-[40.72px] max-w-[80%] leading-[100%] align-middle uppercase text-haiven-blue">
 					Transforming Industries with{" "}
 					<span className="text-accent-green">IOT Innovations</span>
 				</h1>
 
-				<p className="font-regular text-xl text-center leading-[150%] mb-[67.47px]">
+				<p className="font-regular text-base md:text-xl text-center leading-[150%] mb-[67.47px]">
 					Our IoT-driven solutions deliver real-time monitoring across energy,
 					fuel, fleet, and critical infrastructure. With smart sensors, cloud
 					dashboards, and AI insights, we empower businesses and communities to

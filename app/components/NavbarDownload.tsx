@@ -22,7 +22,7 @@ const NavbarDownload = ({ isLightPage, isScrolled }: Props) => {
 		<Button
 			onClick={handleDownload}
 			className={cn(
-				"py-4 h-auto px-10 bg-accent-green font-semibold rounded-[10.18px] transition-colors duration-300 cursor-pointer hover:bg-white hover:text-haiven-blue",
+				"py-4 h-auto px-4 xl:px-10 bg-accent-green font-semibold rounded-[10.18px] transition-colors duration-300 cursor-pointer hover:bg-white hover:text-haiven-blue",
 				isLightPage && !isScrolled ? "text-white" : "text-haiven-blue",
 			)}
 		>

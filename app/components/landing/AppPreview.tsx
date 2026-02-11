@@ -4,15 +4,15 @@ import React from "react";
 
 const AppPreview = () => {
 	return (
-		<section className="bg-haiven-blue pb-10 pt-[207px] font-sans ">
+		<section className="bg-haiven-blue pb-10 px-4 pt-[207px] font-sans ">
 			<div className="relative mb-[35px]">
-				<div className="bg-white relative rounded-[84px] max-w-[1107.88px] mx-auto ">
-					<div className="pl-[85px] pt-[107px] pb-[119.81px] ">
+				<div className="bg-white relative rounded-[84px] max-w-[1107.88px] mx-auto px-4 lg:px-0 ">
+					<div className="lg:pl-[85px] pt-[107px] pb-[119.81px] ">
 						<div className="flex flex-col max-w-[335.93px]">
-							<p className="font-extrabold text-[40.72px] leading-[52.59px] tracking-[-0.16%] mb-[6.79px]">
+							<p className="font-extrabold text-3xl lg:text-[40.72px] leading-[100%] lg:leading-[52.59px] tracking-[-0.16%] mb-[6.79px]">
 								Download App
 							</p>
-							<p className="text-[13.57px] font-regular leading-[100%] tracking-[-0.25px] mb-[27.15px]">
+							<p className="text-[13.57px] font-regular leading-[150%] lg:leading-[100%] tracking-[-0.25px] mb-[27.15px]">
 								Skip the stress. Pay bills, manage guests, and stay in control
 								of your home, all from one easy-to-use app. Download Haiven and
 								simplify your everyday living.
@@ -45,7 +45,7 @@ const AppPreview = () => {
 						alt="iphone with a preview of haiven mobile app"
 						width={659.23}
 						height={547.38}
-						className="absolute -top-[200px] -right-20 bottom-20"
+						className="lg:absolute -top-[200px] -right-20 bottom-20"
 					/>
 				</div>
 			</div>

@@ -26,7 +26,7 @@ const ContactForm = () => {
 		<form
 			action={handleAction}
 			id="contact_form"
-			className="font-sans text-white px-4 large:px-[104px]"
+			className="font-sans text-white max-w-[903.7px] mx-auto px-4 large:px-[104px]"
 		>
 			{state?.message && (
 				<div

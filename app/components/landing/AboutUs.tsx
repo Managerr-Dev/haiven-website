@@ -27,7 +27,7 @@ const AboutUs = () => {
 				<div className="mb-[33px]">
 					<SectionBadge text="About Us" />
 				</div>
-				<h2 className="max-w-[672px] font-bold text-5xl leading-[100%] text-center align-middle mb-[19px] text-haiven-blue">
+				<h2 className="max-w-[672px] font-bold text-3xl lg:text-5xl leading-[100%] text-center align-middle mb-[19px] text-haiven-blue">
 					BUILDING SMART CONNECTED COMMUNITIES
 				</h2>
 
@@ -39,12 +39,12 @@ const AboutUs = () => {
 					className="absolute -bottom-10 left-40"
 					preload={false}
 				/>
-				<Image
+				 <Image
 					src="/images/haiven-leaf.svg"
 					alt="decorative leaf"
 					width={126.8}
 					height={108.85}
-					className="absolute -bottom-10 -right-10"
+					className="absolute xl:block hidden -bottom-10 -right-10"
 					preload={false}
 				/>
 				<Image
@@ -52,11 +52,11 @@ const AboutUs = () => {
 					alt="decorative leaf"
 					width={126.8}
 					height={108.85}
-					className="absolute top-0 -right-20"
+					className="absolute top-0 right-0 xl:-right-20"
 					preload={false}
 				/>
 
-				<p className="text-center font-normal text-xl leading-[150%]">
+				<p className="text-center font-normalctext-base lg:text-xl leading-[150%]">
 					Haiven is designed to revolutionize the way asset owners, facility
 					managers, residents, and security personnel interact with their living
 					or commercial environment. With advanced access control, energy

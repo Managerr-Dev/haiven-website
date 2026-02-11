@@ -36,7 +36,7 @@ const page = () => {
 
 			<div className="">
 				<Description
-					description_1=""
+					description_1="With clearly listed amenities, real-time availability, pricing, and community reviews, users can confidently book spaces that fit their needs. Each facility comes tagged by name and location, with full descriptions and transparent pricing for better planning and hassle-free coordination."
 					title_1="Overview"
 					title_2="Key Functionalities:"
 					description_2={[

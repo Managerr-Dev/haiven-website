@@ -36,7 +36,7 @@ const EventsBlogs = () => {
 			<div className="max-w-[1112.94px] mx-auto font-sans ">
 				<div className="">
 					<SectionBadge text="Other Events & Blog Post" />
-					<h4 className="text-[#1B1816] mt-[10.18px] font-regular text-[40.72px] leading-[48.86px]">
+					<h4 className="text-[#1B1816] mt-[10.18px] font-regular text-3xl xl:text-[40.72px] leading-[30px] xl:leading-[48.86px]">
 						Explore Similar Interests and Topics
 					</h4>
 				</div>
@@ -76,10 +76,10 @@ function BlogCard({ category, date, description, image, title }: Props) {
 					</p>
 
 					<hr />
-					<p className="my-[20.36px] text-[16.97px] font-semibold leading-[20.36px] text-[#FF8900]">
+					<p className="my-[20.36px] text-sm xl:text-[16.97px] font-semibold leading-[20.36px] text-[#FF8900]">
 						{category}
 					</p>
-					<p className="font-semibold text-haiven-blue leading-[20.36px] text-[16.97px]">
+					<p className="font-semibold text-haiven-blue leading-[20.36px] text-sm xl:text-[16.97px]">
 						{date}
 					</p>
 				</div>

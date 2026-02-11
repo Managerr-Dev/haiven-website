@@ -18,7 +18,7 @@ import React from "react";
 const features = [
 	{
 		title: "Metering",
-		href: "/features/metering",
+		href: "/features/smart-metering",
 	},
 	{
 		title: "Facility Booking",

@@ -45,18 +45,18 @@ const Devices = ({
 	line,
 }: Props) => {
 	return (
-		<section className="">
+		<section className="px-4 md:px-6">
 			<div
 				className={cn(
-					"bg-[#0086CF] flex flex-col py-[69px] max-w-[1103.17px] mx-auto pl-[80.78px] min-h-[1203.31px] rounded-[84.15px]",
+					"bg-[#0086CF] flex flex-col py-[69px] max-w-[1103.17px] mx-auto xl:pl-[80.78px] min-h-[1203.31px] rounded-3xl xl:rounded-[84.15px]",
 					sectionClassName,
 				)}
 			>
-				<h2 className="text-center font-sans font-extrabold leading-[42.07px] text-[40.39px] text-white mb-[73.96px]">
+				<h2 className="text-center font-sans font-extrabold leading-[38px] xl:leading-[42.07px] text-4xl xl:text-[40.39px] text-white mb-[73.96px]">
 					{sectionTitle}
 				</h2>
 
-				<div className="flex flex-1 gap-10">
+				<div className="flex md:flex-row items-center justify-center xl:justify-start flex-col flex-1 gap-10">
 					<div className="relative">
 						<Image
 							src={device_1}
@@ -70,17 +70,20 @@ const Devices = ({
 							alt="decorative"
 							width={deviceWidth[type]} //access 280, bills 320,
 							height={400}
-							className={cn("absolute", lines_position[type])}
+							className={cn("absolute hidden xl:block", lines_position[type])}
 						/>
 						<span
-							className={cn("absolute max-w-[150.2px]", label_1_position[type])}
+							className={cn(
+								"absolute hidden xl:block max-w-[150.2px]",
+								label_1_position[type],
+							)}
 						>
 							<span className="font-semibold text-[20.2px] leading-[26.09px] text-[#FF9E00]">
 								{label_1}
 							</span>
 						</span>
 					</div>
-					<div className="self-end relative">
+					<div className="xl:self-end relative">
 						<Image
 							src={device_2}
 							alt="device 2"
@@ -93,9 +96,9 @@ const Devices = ({
 							alt="decorative"
 							width={100}
 							height={50}
-							className="absolute top-1/2 -right-14 -translate-y-1/2 h-[450px]"
+							className="hidden xl:block absolute top-1/2 -right-14 -translate-y-1/2 h-[450px]"
 						/>
-						<div className="absolute top-1/2 -translate-y-1/2 -right-48 max-w-[150.2px]">
+						<div className="hidden xl:block absolute top-1/2 -translate-y-1/2 -right-48 max-w-[150.2px]">
 							<span className="font-semibold text-[20.2px] leading-[26.09px] text-[#FF9E00]">
 								{label_2}
 							</span>

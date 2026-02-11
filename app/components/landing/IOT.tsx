@@ -4,7 +4,7 @@ import Image from "next/image";
 
 const IOT = () => {
 	return (
-		<div className="px-[60px] py-[60px] font-sans relative">
+		<div className="px-4 lg:px-[60px] py-[60px] font-sans relative">
 			<Image
 				src="/images/top-leaf.webp"
 				alt="decorative leaf"
@@ -26,15 +26,15 @@ const IOT = () => {
 				height={508.94}
 				className="absolute bottom-0 right-0"
 			/>
-			<div className="max-w-[1194px] relative mx-auto flex px-[26px] items-center gap-8 py-[154px] bg-white">
+			<div className="max-w-[1194px] relative mx-auto flex flex-col lg:flex-row px-[26px] items-center gap-8 py-[154px] bg-white">
 				<div className="basis-1/2">
 					<div className="space-y-[27.99px] max-w-[535px]">
 						<SectionBadge text="IOT Solutions" />
-						<h5 className="font-semibold text-[40.72px] text-haiven-blue leading-[100%]">
+						<h5 className="font-semibold text-3xl lg:text-[40.72px] text-haiven-blue leading-[100%]">
 							Transforming Industries with{" "}
 							<span className="text-accent-green">IOT Innovations</span>
 						</h5>
-						<p className="text-[#1D2C4D] font-regular text-xl leading-[150%]">
+						<p className="text-[#1D2C4D] font-regular text-base lg:text-xl leading-[150%]">
 							Our IoT-driven solutions deliver real-time monitoring across
 							energy, fuel, fleet, and critical infrastructure. With smart
 							sensors, cloud dashboards, and AI insights, we empower businesses

@@ -1,6 +1,5 @@
-import React from "react";
-import SectionBadge from "../landing/SectionBadge";
 import Image from "next/image";
+import SectionBadge from "../landing/SectionBadge";
 
 const list = [
 	"/images/who-we-are.webp",
@@ -59,12 +58,12 @@ const Hero = () => {
 					Who are we?
 				</h1>
 
-				<p className="font-regular text-xl text-center leading-[150%] mb-1">
+				<p className="font-regular text-base lg:text-xl text-center leading-[150%] mb-1">
 					At Haiven, our mission is to make every day count by creating a
 					smarter, more efficient way to live and manage communities with modern
 					community management tools.
 				</p>
-				<p className="font-regular text-xl text-center leading-[150%] mb-[67.47px]">
+				<p className="font-regular text-base lg:text-xl text-center leading-[150%] mb-[67.47px]">
 					We believe communities thrive when people feel secure, informed, and
 					in control.
 				</p>

@@ -96,9 +96,9 @@ const Testimonial = () => {
 				height={86.85}
 				className="absolute top-0 left-[57px]"
 			/>
-			<div className="px-[84px] pt-[84px] flex flex-col justify-center items-center gap-[27.99px]">
+			<div className="px-4 lg:px-[84px] pt-[84px] flex flex-col justify-center items-center gap-[27.99px] text-center">
 				<SectionBadge text="Testimonials" />
-				<h6 className="font-bold text-[40.72px] text-white leading-[100%]">
+				<h6 className="font-bold text-3xl lg:text-[40.72px] text-white leading-[100%]">
 					WHAT OUR CUSTOMER SAY ABOUT{" "}
 					<span className="text-accent-green">OUR SERVICES</span>
 				</h6>

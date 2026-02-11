@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 
 const Footer = () => {
 	return (
-		<footer className="bg-[#FAFBFC] px-4 pt-[142.07px] pb-[87.95px] font-sans">
+		<footer className="bg-[#FAFBFC] px-4 pt-10 lg:pt-[142.07px] pb-[87.95px] font-sans">
 			<div className="max-w-[1129.53px] mx-auto">
 				<div className="flex flex-wrap justify-between items-start gap-4 mb-[29.61px]">
 					<div className="flex flex-col">
@@ -16,12 +16,12 @@ const Footer = () => {
 							alt="logo"
 							width={133.28}
 							height={36.43}
-							className="mb-[10.18px]"
+							className="mb-[10.18px] w-[200px] lg:w-[133.28px]"
 						/>
 						<p className="mb-[22.9px] font-medium text-[13.57px] leading-[18.66px]">
 							Powering Smarter Living, Every Day
 						</p>
-						<div className="">
+						<div className="hidden lg:block">
 							<Navigation
 								variant="footer"
 								className="font-medium text-[15.27px] leading-[20.36px]"
@@ -32,7 +32,7 @@ const Footer = () => {
 						<form className="md:min-w-[422.89px]">
 							<label
 								htmlFor="newsletter"
-								className="font-medium text-[11.88px] leading-[16.97px] mb-[5.09px] block"
+								className="font-medium text-sm lg:text-[11.88px] leading-[16.97px] mb-4 lg:mb-[5.09px] block"
 							>
 								Subscribe to our newsletter to stay up to date
 							</label>
@@ -48,7 +48,7 @@ const Footer = () => {
 						</form>
 					</div>
 				</div>
-				<div className="flex gap-4 pt-[27.15px] flex-wrap justify-between max-w-[1058.68px] text-[#3B3C3D]">
+				<div className="flex gap-4 lg:pt-[27.15px] flex-wrap justify-between max-w-[1058.68px] text-[#3B3C3D]">
 					<p className="font-medium text-[13.57px] leading-[20.36px] text-[#3B3C3D]">
 						&copy; {new Date().getFullYear()} Haiven. All rights reserved.
 					</p>

@@ -69,8 +69,8 @@ const list = [
 
 const WhatWeDo = () => {
 	return (
-		<section className="bg-haiven-blue px-4 py-[72px] xl:px-[104px]">
-			<div className="max-w-[1077px] mx-auto font-sans space-y-[165px]">
+		<section className="bg-haiven-blue px-4 md:px-6 py-[72px] xl:px-[104px]">
+			<div className="max-w-[1077px] mx-auto font-sans space-y-20 lg:space-y-[165px]">
 				{list.map((item, i) => (
 					<Card {...item} key={i} index={i} />
 				))}
@@ -93,36 +93,42 @@ function Card({ description, image, title, list, index }: Props) {
 		<div className="text-white font-sans">
 			<div
 				className={cn(
-					"flex gap-[25px] items-center flex-wrap",
-					!isEven ? "flex-row-reverse" : "flex-row",
+					"flex gap-[25px] lg:items-center flex-col  ",
+					!isEven ? "lg:flex-row-reverse" : "lg:flex-row",
 				)}
 			>
-				<div className="md:basis-2/5 basis-full">
-					<Image src={image} alt={title} width={405} height={542} />
+				<div className="lg:basis-1/2 xl:basis-2/5 basis-full">
+					<Image
+						src={image}
+						alt={title}
+						width={405}
+						height={542}
+						className="w-full max-h-[400px] xl:max-h-[542px] object-cover object-center rounded-[20px] "
+					/>
 				</div>
-				<div className={cn("md:basis-3/5 basis-full py-6")}>
-					<div className="max-w-[555px] w-full space-y-[27.99px]">
+				<div className={cn("lg:basis-1/2 xl:basis-3/5 basis-full py-6")}>
+					<div className="xl:max-w-[555px] w-full space-y-4 xl:space-y-[27.99px] ">
 						<p
 							className={cn(
-								"font-semibold text-[40.72px] leading-[100%] align-middle",
+								"font-semibold text-3xl lg:text-[40.72px] leading-[100%] align-middle",
 								isEven ? "text-[#FFCC00]" : "text-[#00C3D0]",
 							)}
 						>
 							{title}
 						</p>
 
-						<p className="font-regular text-xl leading-[150%] text-[#FFFFFFB2]">
+						<p className="font-regular text-base xl:text-xl leading-[150%] text-[#FFFFFFB2]">
 							{description}
 						</p>
 
 						{list && (
-							<ul className="list-disc list-inside space-y-[27.99px]">
+							<ul className="list-disc list-inside space-y-4 xl:space-y-[27.99px]">
 								{list.map((item, i) => (
 									<li className="flex gap-3 items-center" key={i}>
-										<div className="size-[17px] rounded-full bg-white flex items-center justify-center">
+										<div className="size-3 xl:size-[17px] rounded-full bg-white flex items-center justify-center">
 											<Check size={7.29} color="#13247E" />
 										</div>
-										<span className="font-medium text-lg text-white leading-[27px]">
+										<span className="font-medium text-sm xl:text-lg text-white leading-[27px]">
 											{item}
 										</span>
 									</li>

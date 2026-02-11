@@ -48,11 +48,11 @@ const list = [
 
 const Partners = () => {
 	return (
-		<div className="py-14">
+		<div className="py-14 px-4">
 			<div className="max-w-[1079px] mx-auto flex items-center justify-center flex-col gap-14">
 				<SectionBadge text="Our Clients & Partners" />
 				<div className="">
-					<div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-y-[37px] gap-x-[71px]">
+					<div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 gap-y-[37px] gap-x-[71px]">
 						{list.map((item, index) => (
 							<Image
 								key={index}

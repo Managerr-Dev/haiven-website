@@ -23,7 +23,7 @@ const list = [
 ];
 const OurAudience = () => {
 	return (
-		<div className="bg-haiven-blue py-[232px] px-[101px] relative">
+		<div className="bg-haiven-blue py-[232px] px-4 xl:px-[101px] relative">
 			<Image
 				src="/images/our-audience.webp"
 				alt="decorative leaf"
@@ -37,11 +37,11 @@ const OurAudience = () => {
 				</p>
 			</div>
 
-			<h4 className="font-bold text-[40.72px] text-white uppercase leading-[60px] mb-[19px]">
+			<h4 className="font-bold text-3xl lg:text-[40.72px] text-white uppercase leading-[40px] lg:leading-[60px] mb-[19px]">
 				Who thrives WITH <span className="text-accent-green">HAIVEN</span>
 			</h4>
 
-			<p className="max-w-[610px] font-normal text-xl leading-[150%] mb-[108px] text-white">
+			<p className="max-w-[610px] font-normal text-base lg:text-xl leading-[150%] mb-[108px] text-white">
 				Haiven is crafted for communities (Gated Communities, Residential
 				Estates & Condominiums, Commercial Properties, and Apartment Complexes)
 				and property managers who desire a smarter, more secure, and efficient
@@ -50,7 +50,7 @@ const OurAudience = () => {
 				through innovation.{" "}
 			</p>
 
-			<div className="max-w-[948.4px] gap-[47.5px] grid grid-cols-3">
+			<div className="max-w-[948.4px] gap-[47.5px] grid md:grid-cols-3">
 				{list.map((item, index) => (
 					<AudienceCard
 						title={item.title}

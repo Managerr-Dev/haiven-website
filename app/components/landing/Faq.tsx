@@ -87,23 +87,32 @@ const faqs = [
 	},
 ];
 
-const Faq = ({ variant }: { variant: "light" | "normal" }) => {
+const Faq = ({ variant }: { variant: "light" | "normal" | "dark" }) => {
 	return (
 		<section
 			className={cn(
-				"bg-haiven-blue py-[137px] px-4 xl:px-[100px] font-sans",
-				variant === "light" ? "bg-white" : "bg-haiven-blue",
+				"bg-haiven-blue py-[137px] px-4 md:px-8  xl:px-[100px] font-sans",
+				variant === "light"
+					? "bg-white"
+					: variant === "dark"
+						? "bg-[#373938]"
+						: "bg-haiven-blue",
 			)}
 		>
 			<div className="max-w-[1080px] mx-auto">
 				<SectionBadge text="Support" />
 				<div className="max-w-[843px]">
-					<h6 className="text-[#FFCC00] font-bold text-5xl leading-[100%] uppercase mt-[33px] mb-[19px]">
+					<h6
+						className={cn(
+							"text-[#FFCC00] font-bold text-3xl lg:text-5xl leading-[100%] uppercase mt-[33px] mb-[19px]",
+							variant === "dark" && "text-white",
+						)}
+					>
 						Frequently Asked Questions
 					</h6>
 					<p
 						className={cn(
-							"font-regular text-lg leading-[28px] text-white",
+							"font-regular text-base lg:text-lg leading-[150%] lg:leading-[28px] text-white",
 							variant === "light" && "text-[#3B3C3D]",
 						)}
 					>
@@ -123,7 +132,7 @@ const Faq = ({ variant }: { variant: "light" | "normal" }) => {
 							<AccordionItem key={item.question} value={item.question}>
 								<AccordionTrigger
 									className={cn(
-										"text-white py-8 text-lg font-medium leading-7",
+										"text-white py-8 text-sm lg:text-lg font-medium leading-7",
 										variant === "light" && "text-[#3B3C3D]",
 									)}
 								>
@@ -131,7 +140,7 @@ const Faq = ({ variant }: { variant: "light" | "normal" }) => {
 								</AccordionTrigger>
 								<AccordionContent
 									className={cn(
-										"text-white text-base leading-6",
+										"text-white text-xs lg:text-base leading-[150%] lg:leading-6",
 										variant === "light" && "text-[#3B3C3D]",
 									)}
 								>
