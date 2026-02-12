@@ -69,12 +69,26 @@ const list = [
 
 const WhatWeDo = () => {
 	return (
-		<section className="bg-haiven-blue px-4 md:px-6 py-[72px] xl:px-[104px]">
-			<div className="max-w-[1077px] mx-auto font-sans space-y-20 lg:space-y-[165px]">
+		<section className="bg-haiven-blue relative px-4 md:px-6 py-[72px] xl:px-[104px]">
+			<div className="max-w-[1077px]  mx-auto font-sans space-y-20 lg:space-y-[165px]">
 				{list.map((item, i) => (
 					<Card {...item} key={i} index={i} />
 				))}
 			</div>
+			<Image
+				src="/images/iot-middle-leaf.png"
+				alt="iot decorative leaf"
+				width={295.88}
+				height={328.94}
+				className="absolute top-[48%] right-0 "
+			/>
+			<Image
+				src="/images/iot-last-leaf.png"
+				alt="iot decorative leaf"
+				width={295.88}
+				height={328.94}
+				className="absolute -bottom-[260px] right-0 "
+			/>
 		</section>
 	);
 };

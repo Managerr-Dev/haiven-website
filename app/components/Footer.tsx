@@ -1,9 +1,8 @@
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
 import Navigation from "./Navigation";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
 
 const Footer = () => {
 	return (
@@ -54,26 +53,26 @@ const Footer = () => {
 					</p>
 					<div className="flex items-center gap-[13.57px] ">
 						<Link
-							href="/"
-							className="font-medium text-[13.57px] leading-[20.36px]"
+							href="/terms-conditions"
+							className="font-medium text-[13.57px] leading-[20.36px] hover:underline"
 						>
 							Terms
 						</Link>
 						<Link
-							href="/"
-							className="font-medium text-[13.57px] leading-[20.36px]"
+							href="/privacy-policy"
+							className="font-medium text-[13.57px] leading-[20.36px] hover:underline"
 						>
 							Privacy
 						</Link>
 						<Link
 							href="/"
-							className="font-medium text-[13.57px] leading-[20.36px]"
+							className="font-medium text-[13.57px] leading-[20.36px] hover:underline"
 						>
 							Cookie
 						</Link>
 					</div>
 					<div className="flex items-center gap-[20.36px]">
-						<Link href="/">
+						<Link href="https://x.com/Haiven_ng" className="hover:scale-110">
 							<Image
 								src="/images/twitter.png"
 								alt="twitter"
@@ -81,7 +80,10 @@ const Footer = () => {
 								height={20.36}
 							/>
 						</Link>
-						<Link href="/">
+						<Link
+							href="https://www.instagram.com/haiven_ng/"
+							className="hover:scale-110"
+						>
 							<Image
 								src="/images/instagram.png"
 								alt="instagram"
@@ -89,7 +91,10 @@ const Footer = () => {
 								height={20.36}
 							/>
 						</Link>
-						<Link href="/">
+						<Link
+							href="https://web.facebook.com/Haivennig"
+							className="hover:scale-110"
+						>
 							<Image
 								src="/images/facebook.png"
 								alt="facebook"
@@ -97,7 +102,10 @@ const Footer = () => {
 								height={20.36}
 							/>
 						</Link>
-						<Link href="/">
+						<Link
+							href="https://www.linkedin.com/company/haivenng/"
+							className="hover:scale-110"
+						>
 							<Image
 								src="/images/linkedin.png"
 								alt="linkedin"

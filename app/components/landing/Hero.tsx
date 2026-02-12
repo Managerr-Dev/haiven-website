@@ -1,9 +1,11 @@
-import Image from "next/image";
-import Navbar from "../Navbar";
-import SectionBadge from "./SectionBadge";
+"use client";
+
 import { Button } from "@/components/ui/button";
-import BookADemoForm from "./BookADemoForm";
+import Image from "next/image";
 import Link from "next/link";
+import BookADemoForm from "./BookADemoForm";
+import HeroHeading from "./HeroText";
+import SectionBadge from "./SectionBadge";
 
 const Hero = () => {
 	return (
@@ -13,11 +15,7 @@ const Hero = () => {
 					{/* Badge */}
 					<SectionBadge text="Welcome to Haiven" />
 
-					<h1 className="font-bold text-3xl lg:text-5xl text-white uppercase leading-[35px] lg:leading-[60px]">
-						Manage Every Aspect of Your{" "}
-						<span className="text-accent-green">Estate</span> from{" "}
-						<span className="text-accent-green">One Place</span>
-					</h1>
+					<HeroHeading />
 
 					<p className="text-white text-base lg:text-xl font-light font-sora-sans">
 						From digital access control to visitor management systems, utility
@@ -28,12 +26,12 @@ const Hero = () => {
 
 					<div className="flex items-center gap-[13.57px] mt-[20.36px]">
 						<Link href="https://admin.haiven.net/signup">
-							<Button className="rounded-[10.18px] py-4 h-auto px-[25.2px] flex items-center gap-1 text-[13.57px] font-medium bg-accent-green leading-[20.36px] text-haiven-blue hover:bg-white hover:text-haiven-blue">
+							<Button className="w-[167px] rounded-[10.18px] py-4 h-auto px-[25.2px] flex items-center gap-1 text-[13.57px] font-medium bg-accent-green leading-[20.36px] text-haiven-blue hover:bg-white hover:text-haiven-blue">
 								Get Started
 							</Button>
 						</Link>
 						<BookADemoForm>
-							<Button className="rounded-[10.18px] py-4 h-auto px-[25.2px] flex items-center gap-1 text-[13.57px] font-medium bg-transparent leading-[20.36px] text-white border-[0.8px] border-white hover:bg-white hover:text-haiven-blue">
+							<Button className="w-[167px] rounded-[10.18px] py-4 h-auto px-[25.2px] flex items-center gap-1 text-[13.57px] font-medium bg-transparent leading-[20.36px] text-white border-[0.8px] border-white hover:bg-white hover:text-haiven-blue">
 								Request a Demo
 							</Button>
 						</BookADemoForm>

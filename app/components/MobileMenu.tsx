@@ -62,7 +62,7 @@ const MobileMenu = ({ isOpen, onClose }: MobileMenuProps) => {
 	return (
 		<div
 			className={cn(
-				"fixed inset-0 top-0 bg-haiven-blue z-[90] transition-all duration-300 lg:hidden overflow-y-auto pt-[100px]",
+				"fixed inset-0 top-0 bg-haiven-blue z-90 transition-all duration-300 lg:hidden overflow-y-auto pt-[100px]",
 				isOpen
 					? "translate-x-0 opacity-100"
 					: "translate-x-full opacity-0 pointer-events-none",

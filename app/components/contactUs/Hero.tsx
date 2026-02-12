@@ -16,7 +16,7 @@ const list = [
 	{
 		title: "Office Address",
 		icon: "/images/office.svg",
-		value: "+234 912 228  4189",
+		value: "Block 10, Plot 2 & 3 Admiralty Way, Lekki Phase 1, Lagos, Nigeria",
 	},
 ];
 
@@ -75,7 +75,7 @@ const Hero = () => {
 					Let us know how we can help make your community experience better.
 				</p>
 
-				<div className="grid grid-cols-2 sm:grid-cols-3 justify-between gap-4 w-full max-w-[795px] mx-auto">
+				<div className="grid grid-cols-2 sm:grid-cols-3 items-start justify-between gap-4 w-full max-w-[795px] mx-auto">
 					{list.map((item, index) => (
 						<Card key={index} {...item} />
 					))}
@@ -98,9 +98,13 @@ function Card({ title, icon, value }: Props) {
 				<Image src={icon} alt={title} width={27.15} height={27.15} />
 			</div>
 			<p className="">{title}</p>
-			<a className="hover:underline" href={value}>
-				{value.split(":")[1]}
-			</a>
+			{value.includes(":") ? (
+				<a className="hover:underline" href={value}>
+					{value.split(":")[1]}
+				</a>
+			) : (
+				<span> {value}</span>
+			)}
 		</div>
 	);
 }

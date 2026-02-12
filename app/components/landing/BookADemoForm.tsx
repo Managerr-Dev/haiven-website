@@ -64,7 +64,7 @@ const BookADemoForm = ({ children }: { children: React.ReactNode }) => {
 								id="name"
 								name="name"
 								placeholder="Full name"
-								className="border-[0.85px] border-[#DADADA] rounded-md p-2 bg-white h-auto py-[13.58px] px-[10.54px] font-regular text-[13.58px] leading-[20.37px] text-[#979797]"
+								className="border-[0.85px] border-[#DADADA] rounded-md p-2 bg-white h-auto py-[13.58px] px-[10.54px] font-regular text-[13.58px] leading-[20.37px]  placeholder:text-[#979797] text-black"
 								required
 							/>
 							{state?.errors?.name && (
@@ -84,7 +84,7 @@ const BookADemoForm = ({ children }: { children: React.ReactNode }) => {
 								id="email"
 								name="email"
 								placeholder="example@example.com"
-								className="border-[0.85px] border-[#DADADA] rounded-md p-2 bg-white h-auto py-[13.58px] px-[10.54px] font-regular text-[13.58px] leading-[20.37px] text-[#979797]"
+								className="border-[0.85px] border-[#DADADA] rounded-md p-2 bg-white h-auto py-[13.58px] px-[10.54px] font-regular text-[13.58px] leading-[20.37px]  placeholder:text-[#979797] text-black"
 								required
 							/>
 							{state?.errors?.email && (
@@ -105,7 +105,7 @@ const BookADemoForm = ({ children }: { children: React.ReactNode }) => {
 								id="community_name"
 								name="community_name"
 								placeholder="haiven estate"
-								className="border-[0.85px] border-[#DADADA] rounded-md p-2 bg-white h-auto py-[13.58px] px-[10.54px] font-regular text-[13.58px] leading-[20.37px] text-[#979797]"
+								className="border-[0.85px] border-[#DADADA] rounded-md p-2 bg-white h-auto py-[13.58px] px-[10.54px] font-regular text-[13.58px] leading-[20.37px]  placeholder:text-[#979797] text-black"
 								required
 							/>
 							{state?.errors?.community_name && (
@@ -129,7 +129,7 @@ const BookADemoForm = ({ children }: { children: React.ReactNode }) => {
 							name="message"
 							rows={10}
 							placeholder="Leave your message"
-							className="border-[0.85px] border-[#DADADA] rounded-md p-2 bg-white h-auto py-[13.58px] px-[10.54px] font-regular text-[13.58px] leading-[20.37px] text-[#979797]"
+							className="border-[0.85px] border-[#DADADA] rounded-md p-2 bg-white h-auto py-[13.58px] px-[10.54px] font-regular text-[13.58px] leading-[20.37px] placeholder:text-[#979797] text-black"
 							required
 						></textarea>
 						{state?.errors?.message && (

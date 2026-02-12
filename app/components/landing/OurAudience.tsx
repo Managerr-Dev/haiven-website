@@ -29,7 +29,7 @@ const OurAudience = () => {
 				alt="decorative leaf"
 				width={479.28}
 				height={330.66}
-				className="absolute top-0 right-0"
+				className="absolute top-0 right-0 h-[180px] w-[200px] md:h-[230.66px] md:w-[279.28px] lg:h-[330.66px] lg:w-[479.28px] "
 			/>
 			<div className="py-1.5 px-2.5 flex items-center gap-[5px] bg-white rounded-[100px] w-fit mb-[33px]">
 				<p className="font-medium text-xs leading-[18px] text-haiven-blue">
@@ -50,7 +50,7 @@ const OurAudience = () => {
 				through innovation.{" "}
 			</p>
 
-			<div className="max-w-[948.4px] gap-[47.5px] grid md:grid-cols-3">
+			<div className="max-w-[948.4px] gap-[47.5px] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
 				{list.map((item, index) => (
 					<AudienceCard
 						title={item.title}

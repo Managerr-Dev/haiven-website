@@ -41,6 +41,13 @@ const Hero = () => {
 					))}
 				</div>
 			</div>
+			<Image
+				src="/images/iot-first-leaf.png"
+				alt="iot decorative leaf"
+				width={295.88}
+				height={400.94}
+				className="absolute -bottom-[312px] left-0 z-90"
+			/>
 		</div>
 	);
 };
