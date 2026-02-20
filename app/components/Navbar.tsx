@@ -29,11 +29,6 @@ const Navbar = () => {
 		return () => window.removeEventListener("scroll", handleScroll);
 	}, []);
 
-	// Reset menu state when pathname changes
-	useEffect(() => {
-		setIsMenuOpen(false);
-	}, [pathname]);
-
 	// Prevent scrolling when menu is open
 	useEffect(() => {
 		if (isMenuOpen) {
