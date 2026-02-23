@@ -190,7 +190,7 @@ function TestimonialCard({ community, id, name, testimony, image }: Props) {
 					</div>
 					<div className="">
 						<p className="font-normal text-[20.36px] leading[26.3px] text-[#020202]">
-							{name} {id}
+							{name}
 						</p>
 						<p className="text-[13.57px] leading-[20.36px] font-light">
 							{community}
