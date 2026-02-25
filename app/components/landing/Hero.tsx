@@ -10,8 +10,8 @@ import SectionBadge from "./SectionBadge";
 const Hero = () => {
 	return (
 		<div className="flex flex-col lg:flex-row bg-haiven-blue min-h-screen pt-[127px] lg:pt-0 h-[978px] px-4 gap-4 lg:px-0 lg:gap-0">
-			<div className="lg:pl-[100px] basis-1/2 flex justify-center items-center font-sans ">
-				<div className="flex flex-col justify-center gap-3 max-w-[644px]">
+			<div className="xl:pl-[100px] basis-1/2 flex justify-center items-center font-sans ">
+				<div className="flex flex-col justify-center gap-3 max-w-[644px] px-8">
 					{/* Badge */}
 					<SectionBadge text="Welcome to Haiven" />
 

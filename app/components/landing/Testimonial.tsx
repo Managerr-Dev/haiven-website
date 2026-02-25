@@ -125,12 +125,13 @@ const Testimonial = () => {
 				</h6>
 			</div>
 			<div className="mt-[75.47px]">
-				<div className="mb-[56.99px] overflow-hidden" ref={emblaRef}>
+				<TestimonialVideoComp />
+				{/* <div className="mb-[56.99px] overflow-hidden" ref={emblaRef}>
 					<div className="flex items-center ">
 						{testimonials.map((item) => (
 							<div
 								key={item.id}
-								className="shrink-0 h-[280px] basis-[380px] px-2"
+								className="shrink-0 h-[280px] flex-[380px] px-2"
 							>
 								<TestimonialCard
 									id={item.id}
@@ -148,7 +149,7 @@ const Testimonial = () => {
 						{testimonials.map((item) => (
 							<div
 								key={item.id}
-								className="shrink-0 h-[280px] basis-[380px] px-2"
+								className="shrink-0 h-[280px] flex-[380px] px-2"
 							>
 								<TestimonialCard
 									id={item.id}
@@ -160,7 +161,7 @@ const Testimonial = () => {
 							</div>
 						))}
 					</div>
-				</div>
+				</div> */}
 			</div>
 		</div>
 	);
@@ -203,6 +204,45 @@ function TestimonialCard({ community, id, name, testimony, image }: Props) {
 						{testimony}
 					</p>
 				</div>
+			</div>
+		</div>
+	);
+}
+
+function TestimonialVideoComp() {
+	return (
+		<div className="flex flex-col px-4 xl:flex-row items-center gap-[23px] max-w-[1099px] mx-auto">
+			<div className="relative min-h-[400px] h-[681px] xl:width-[60%] pt-10">
+				<Image
+					src="/images/testimonial-decorator.png"
+					alt="image"
+					width={160}
+					height={681}
+					className="absolute h-full top-0 bottom-0 -left-10"
+				/>
+				<Image
+					src="/images/chinedu-i.webp"
+					alt="image"
+					width={560}
+					height={652}
+					className="h-full w-full  relative"
+				/>
+			</div>
+			<div className=" xl:width-[40%]">
+				<h6 className="font-medium text-lg leading-[27px] text-white mb-[26px]">
+					&ldquo;Lorem ipsum dolor sit, amet consectetur adipisicing elit. Vero
+					doloremque commodi, natus accusantium culpa provident eligendi
+					molestias, iusto praesentium aliquid amet velit harum modi officia
+					laudantium hic voluptas. Ex unde dolores consequatur eaque impedit
+					cum. Est repudiandae ipsum hic facilis, aliquam assumenda, veritatis,
+					ex cumque accusantium praesentium tempora dolorem nostrum?&rdquo;
+				</h6>
+				<p className="mb-[10px] font-light leading-6 text-base text-white">
+					Joshua Biyere
+				</p>
+				<p className="font-light text-sm text-white leading-[21px]">
+					Cedarwood Estate
+				</p>
 			</div>
 		</div>
 	);

@@ -77,7 +77,8 @@ const Navbar = () => {
 						</nav>
 
 						{/* Desktop button */}
-						<div className="hidden lg:block">
+						<div className="hidden lg:flex items-center gap-[18px]">
+							<Link href="https://admin.haiven.net/sign-in" className="text-white">Login</Link>
 							<NavbarDownload
 								isLightPage={isLightPage}
 								isScrolled={isScrolled}
