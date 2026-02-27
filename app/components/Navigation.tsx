@@ -125,7 +125,7 @@ const Navigation = ({ className, isScrolled, variant = "navbar" }: Props) => {
 						<Link href="/iot-solutions">IOT Solutions</Link>
 					</NavigationMenuLink>
 				</NavigationMenuItem>
-				{/* <NavigationMenuItem>
+				<NavigationMenuItem>
 					<NavigationMenuLink
 						asChild
 						className={cn(
@@ -141,7 +141,7 @@ const Navigation = ({ className, isScrolled, variant = "navbar" }: Props) => {
 					>
 						<Link href="/blog">Blog</Link>
 					</NavigationMenuLink>
-				</NavigationMenuItem> */}
+				</NavigationMenuItem>
 				<NavigationMenuItem>
 					<NavigationMenuLink
 						asChild

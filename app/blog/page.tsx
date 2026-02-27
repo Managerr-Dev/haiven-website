@@ -82,7 +82,7 @@ const page = async () => {
 				</div>
 			</div>
 
-			<div className="max-w-[1127.67px] mx-auto pt-[85.95px]">
+			<div className="max-w-[1127.67px] mx-auto px-4 pt-[85.95px]">
 				<ul className=" gap-y-4 grid sm:grid-cols-2 md:grid-cols-3 gap-[18px]">
 					{posts.map((post) => (
 						<BlogCard key={post._id} {...post} />

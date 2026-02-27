@@ -30,10 +30,10 @@ const links = [
 export async function generateMetadata({
 	params,
 }: {
-	params: { slug: string };
+	params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
 	const post = await client.fetch(POST_QUERY, {
-		slug: params.slug,
+		slug: (await params).slug,
 	});
 
 	if (!post) return {};
@@ -69,7 +69,7 @@ const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
 		: null;
 
 	return (
-		<div className="py-[127px]">
+		<div className="py-[127px] px-4">
 			<div className="bg-[#13247E08] flex flex-col max-w-[1129.4px] mx-auto w-full border border-[#13247E4D] rounded-[10.18px] p-[13.57px] mb-[46.42px]">
 				<p className="mb-2.5 font-semibold text-[15.27px] leading-[17.81px] text-[#FF8900]">
 					{moment(post.publishedAt).format("MMMM DD, YYYY")}
@@ -116,7 +116,7 @@ const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
 					)}
 				</div>
 			</div>
-			<main className="max-w-[1129.4px] mx-auto px-4 lg:px-[93.16px] flex flex-col gap-4 ">
+			<main className="max-w-[1129.4px] mx-auto lg:px-[93.16px] flex flex-col gap-4 ">
 				<div className="prose">
 					{Array.isArray(post.body) && (
 						<PortableText
