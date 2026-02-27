@@ -1,3 +1,4 @@
+import SharePost from "@/app/components/blog/SharePost";
 import SimilarInterests from "@/app/components/blog/SimilarInterests";
 import { POST_QUERY } from "@/app/lib/queries/Post";
 import { Button } from "@/components/ui/button";
@@ -5,27 +6,14 @@ import { cn } from "@/lib/utils";
 import { client } from "@/sanity/lib/client";
 import createImageUrlBuilder from "@sanity/image-url";
 import { SanityImageSource } from "@sanity/image-url/lib/types/types";
-import { Copy } from "lucide-react";
 import moment from "moment";
 import { Metadata } from "next";
 import { PortableText, SanityDocument } from "next-sanity";
 import Image from "next/image";
 import Link from "next/link";
+import { EmailShareButton } from "react-share";
 
-const links = [
-	{
-		image: "/images/share-twitter.png",
-		alt: "share to twitter",
-	},
-	{
-		image: "/images/share-facebook.png",
-		alt: "share to facebook",
-	},
-	{
-		image: "/images/share-linkedin.png",
-		alt: "share to linkedin",
-	},
-];
+
 
 export async function generateMetadata({
 	params,
@@ -68,9 +56,15 @@ const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
 		? urlFor(post.image)?.width(550).height(310).url()
 		: null;
 
+	const postAuthorImageUrl = post.image
+		? urlFor(post.author.image)?.width(550).height(310).url()
+		: null;
+
+	console.log({ post: post.author });
+
 	return (
 		<div className="py-[127px] px-4">
-			<div className="bg-[#13247E08] flex flex-col max-w-[1129.4px] mx-auto w-full border border-[#13247E4D] rounded-[10.18px] p-[13.57px] mb-[46.42px]">
+			<div className="bg-[#13247E08] flex flex-col max-w-[1129.4px] mx-auto w-full border-[0.68px] border-[#13247E4D] rounded-[10.18px] p-[13.57px] mb-[46.42px]">
 				<p className="mb-2.5 font-semibold text-[15.27px] leading-[17.81px] text-[#FF8900]">
 					{moment(post.publishedAt).format("MMMM DD, YYYY")}
 				</p>
@@ -78,7 +72,7 @@ const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
 					{post.title}
 				</h1>
 				{/* tags */}
-				<div className="mb-2.5">
+				<div className="mb-2.5 flex gap-2.5 flex-wrap">
 					{post.tags.map(
 						(
 							item: { _id: string; title: string; slug: string },
@@ -117,7 +111,7 @@ const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
 				</div>
 			</div>
 			<main className="max-w-[1129.4px] mx-auto lg:px-[93.16px] flex flex-col gap-4 ">
-				<div className="prose">
+				<div className="prose text-[#475467]">
 					{Array.isArray(post.body) && (
 						<PortableText
 							value={post.body}
@@ -151,44 +145,24 @@ const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
 					{/* profile */}
 					<div className="flex gap-[13.57px]">
 						<Image
-							src=""
+							src={postAuthorImageUrl || ""}
 							alt="user profile"
 							width={47.5}
 							height={47.5}
-							className="rounded-full size-8 lg:size-[47.5px]"
+							className="rounded-full size-8 lg:size-[47.5px] object-cover object-top"
 						/>
 						<div className="">
 							<p className="font-semibold text-[15.27px] leading-[23.75px] text-[#101828] ver">
-								Olivia Rhye
+								{post.author?.name || ""}
 							</p>
 							<p className="font-normal text-[13.57px] leading-[20.36px] text-[#475467]">
-								Product Designer, Untitled
+								{post?.author?.title || ""}
 							</p>
 						</div>
 					</div>
 
 					{/* sharing */}
-					<div className="flex items-center gap-[10.18px]">
-						<Link href="/">
-							<Button className="border-[0.85px] border-[#D0D5DD] flex bg-white h-auto py-[8.48px] px-[13.57px] items-center gap-1.5 font-semibold text-[11.88px] text-[#344054]">
-								<Copy />
-								Copy link
-							</Button>
-						</Link>
-
-						{links?.map((item) => (
-							<Link href="/" key={item.alt}>
-								<Button className="border-[0.85px] border-[#D0D5DD] bg-white flex h-auto p-[8.48px] items-center gap-1.5 font-semibold text-[11.88px] text-[#344054]">
-									<Image
-										src={item.image}
-										alt={item.alt}
-										width={16.97}
-										height={16.97}
-									/>
-								</Button>
-							</Link>
-						))}
-					</div>
+					<SharePost />
 				</div>
 
 				<SimilarInterests

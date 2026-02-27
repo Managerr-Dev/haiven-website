@@ -1,10 +1,8 @@
+import { RELATED_POSTS_QUERY } from "@/app/lib/queries/Post";
 import { client } from "@/sanity/lib/client";
-import SectionBadge from "../landing/SectionBadge";
 import { SanityDocument } from "next-sanity";
-import { POSTS_QUERY, RELATED_POSTS_QUERY } from "@/app/lib/queries/Post";
+import SectionBadge from "../landing/SectionBadge";
 import BlogCard from "./BlogCard";
-
-const options = { next: { revalidate: 30 } };
 
 interface Props {
 	currentPostId: string;
@@ -27,17 +25,17 @@ const SimilarInterests = async ({ currentPostId, tags }: Props) => {
 					</h4>
 				</div>
 				<div className="mt-[67.86px]">
-					<div className="grid sm:grid-cols-2 md:grid-cols-3 gap-[22.06px]">
-						{posts.map((item, i) => (
-							<BlogCard key={i} {...item} />
-						))}
-						{posts.map((post, index) => (
-							<BlogCard key={2} {...post} />
-						))}
-						{posts.map((post) => (
-							<BlogCard key={3} {...post} />
-						))}
-					</div>
+					{posts?.length > 0 ? (
+						<div className="grid sm:grid-cols-2 md:grid-cols-3 gap-[22.06px]">
+							{posts.map((item, i) => (
+								<BlogCard key={i} {...item} />
+							))}
+						</div>
+					) : (
+						<div className="text-center text-gray-600">
+							You are all caught up
+						</div>
+					)}
 				</div>
 			</div>
 		</section>

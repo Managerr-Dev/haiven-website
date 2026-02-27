@@ -29,6 +29,7 @@
     "react": "19.2.3",
     "react-dom": "19.2.3",
     "react-google-recaptcha-v3": "^1.11.0",
+    "react-share": "^5.2.2",
     "sanity": "^4.22.0",
     "styled-components": "^6.3.11",
     "tailwind-merge": "^3.4.0",
