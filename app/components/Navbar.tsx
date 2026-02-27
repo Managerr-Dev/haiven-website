@@ -14,7 +14,7 @@ const Navbar = () => {
 	const pathname = usePathname();
 	const [isScrolled, setIsScrolled] = useState(false);
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
-	const isLightPage = pathname !== "/";
+	const isLightPage = pathname !== "/" && pathname !== "/blog";
 
 	useEffect(() => {
 		const handleScroll = () => {
@@ -43,6 +43,7 @@ const Navbar = () => {
 
 	const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
+	if (pathname.includes("studio")) return null;
 	return (
 		<>
 			<div
@@ -78,7 +79,12 @@ const Navbar = () => {
 
 						{/* Desktop button */}
 						<div className="hidden lg:flex items-center gap-[18px]">
-							<Link href="https://admin.haiven.net/sign-in" className="text-white">Login</Link>
+							<Link
+								href="https://admin.haiven.net/sign-in"
+								className="text-white"
+							>
+								Login
+							</Link>
 							<NavbarDownload
 								isLightPage={isLightPage}
 								isScrolled={isScrolled}

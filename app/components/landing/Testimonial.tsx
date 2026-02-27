@@ -212,36 +212,43 @@ function TestimonialCard({ community, id, name, testimony, image }: Props) {
 function TestimonialVideoComp() {
 	return (
 		<div className="flex flex-col px-4 xl:flex-row items-center gap-[23px] max-w-[1099px] mx-auto">
-			<div className="relative min-h-[400px] h-[681px] xl:width-[60%] pt-10">
+			<div className="relative min-h-[400px] h-[681px]  xl:width-[60%] pt-10">
 				<Image
 					src="/images/testimonial-decorator.png"
 					alt="image"
 					width={160}
 					height={681}
-					className="absolute h-full top-0 bottom-0 -left-10"
+					className="absolute hidden md:block  h-full top-0 bottom-0 -left-10"
 				/>
-				<Image
-					src="/images/chinedu-i.webp"
-					alt="image"
-					width={560}
-					height={652}
-					className="h-full w-full  relative"
-				/>
+				<div className="w-full md:min-w-[560px]">
+					<iframe
+						width="560"
+						height="642"
+						src="https://www.youtube.com/embed/9EcUX623RNE"
+						title="How Haiven Transformed Power Vending at Cedarwood Luxury Apartments and Terraces | FM Testimonial"
+						allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+						className="relative w-full"
+					></iframe>
+				</div>
 			</div>
 			<div className=" xl:width-[40%]">
 				<h6 className="font-medium text-lg leading-[27px] text-white mb-[26px]">
-					&ldquo;Lorem ipsum dolor sit, amet consectetur adipisicing elit. Vero
-					doloremque commodi, natus accusantium culpa provident eligendi
-					molestias, iusto praesentium aliquid amet velit harum modi officia
-					laudantium hic voluptas. Ex unde dolores consequatur eaque impedit
-					cum. Est repudiandae ipsum hic facilis, aliquam assumenda, veritatis,
-					ex cumque accusantium praesentium tempora dolorem nostrum?&rdquo;
+					&ldquo;... We partnered with Haiven to upgrade our metering and
+					vending system across the Estate here at Cedarwood. Before Haiven came
+					in, we&apos;ve been having a lot of issues with our vending system and
+					power metering... they were able to bring... their upgraded systems to
+					manage these process and it became seamless to the point that we can
+					now do our vending remotely wherever we are...some of our residents
+					even while they are abroad, they can do their vending... If you are an
+					Estate manager, Facility manager or an Estate looking for a system or
+					organization that can manager your vending system... Haiven is the
+					best...&rdquo;
 				</h6>
 				<p className="mb-[10px] font-light leading-6 text-base text-white">
-					Joshua Biyere
+					Frank Awani
 				</p>
 				<p className="font-light text-sm text-white leading-[21px]">
-					Cedarwood Estate
+					Facility Manager - Cedarwood Estate
 				</p>
 			</div>
 		</div>

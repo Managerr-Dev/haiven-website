@@ -45,7 +45,7 @@ interface Props extends NavigationMenuProps {
 
 const Navigation = ({ className, isScrolled, variant = "navbar" }: Props) => {
 	const pathname = usePathname();
-	const isLightPage = pathname !== "/";
+	const isLightPage = pathname !== "/" && pathname !== "/blog";
 	const useDarkText = (isLightPage && !isScrolled) || variant === "footer";
 
 	const textColor = useDarkText ? "text-[#3B3C3D]" : "text-white";
