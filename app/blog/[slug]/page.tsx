@@ -1,7 +1,6 @@
 import SharePost from "@/app/components/blog/SharePost";
 import SimilarInterests from "@/app/components/blog/SimilarInterests";
 import { POST_QUERY } from "@/app/lib/queries/Post";
-import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { client } from "@/sanity/lib/client";
 import createImageUrlBuilder from "@sanity/image-url";
@@ -10,10 +9,6 @@ import moment from "moment";
 import { Metadata } from "next";
 import { PortableText, SanityDocument } from "next-sanity";
 import Image from "next/image";
-import Link from "next/link";
-import { EmailShareButton } from "react-share";
-
-
 
 export async function generateMetadata({
 	params,
