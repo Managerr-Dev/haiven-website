@@ -39,13 +39,18 @@ function BlogCard(post: SanityDocument) {
 
 					<hr />
 					{post.tags.map(
-						(item: { _id: string; title: string; slug: string }) => (
-							<p
+						(item: {
+							_id: string;
+							title: string;
+							slug: { current: string };
+						}) => (
+							<Link
 								key={item._id}
-								className="my-[20.36px] text-sm xl:text-[16.97px] font-semibold leading-[20.36px] text-[#FF8900]"
+								href={`/blog?category=${item.slug.current}`}
+								className="my-[20.36px] inline-block text-sm xl:text-[16.97px] font-semibold leading-[20.36px] text-[#FF8900]"
 							>
 								{item.title}
-							</p>
+							</Link>
 						),
 					)}
 					<p className="font-semibold text-haiven-blue leading-[20.36px] text-sm xl:text-[16.97px]">
