@@ -1,11 +1,9 @@
 "use client";
 
-import { cn } from "@/lib/utils";
-import { ArrowDown, ArrowUp } from "lucide-react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import SectionBadge from "./SectionBadge";
 import ActiveCard from "./ActiveCard";
+import SectionBadge from "./SectionBadge";
 
 const featuresData = [
 	{
@@ -20,7 +18,7 @@ const featuresData = [
 		title: "Access Control and Security",
 		description:
 			"Secure and streamline community entry with a real-time digital access system. Manage residents, guests, and vendors using personalized entry codes, movement tracking, and automated permissions, all from one dashboard. Empower security teams with smart tools for visitor validation, incident logging, and real-time alerts to enhance safety and response.",
-		image: "/images/illustration.svg",
+		image: "/images/access-control-security.svg",
 		mainbgcolor: "bg-[#D1E7F4]",
 		accentColor: "bg-[#7DC6EF]",
 	},
@@ -28,7 +26,7 @@ const featuresData = [
 		title: "Community & Engagement",
 		description:
 			"Haiven builds stronger connections through community engagement tools like in-app messaging, announcements, and broadcast notifications. We keep residents informed, heard, and involved in their living environment anytime, anywhere.",
-		image: "/images/illustration.svg",
+		image: "/images/community-engagement.svg",
 		mainbgcolor: "bg-[#CBE6E9]",
 		accentColor: "bg-[#68C2CA]",
 	},
@@ -44,7 +42,7 @@ const featuresData = [
 		title: "Facility Booking",
 		description:
 			"Easily book shared spaces like the gym or clubhouse with real-time availability, transparent pricing, and community reviews, all clearly listed for stress-free planning.",
-		image: "/images/illustration.svg",
+		image: "/images/facility-booking.svg",
 		mainbgcolor: "bg-[#4879C54D]",
 		accentColor: "bg-[#4879C5]",
 	},
@@ -52,7 +50,7 @@ const featuresData = [
 		title: "Market Place",
 		description:
 			"Haiven Marketplace connects residents to a trusted network of local vendors and artisans, offering everything from household essentials to gadgets and kids’ items, all at community-powered discounts. With group buying and shared logistics, members enjoy up to 25% savings, faster deliveries, and lower costs.",
-		image: "/images/illustration.svg",
+		image: "/images/marketplace.svg",
 		mainbgcolor: "bg-[#2EDAB24D]",
 		accentColor: "bg-[#2EDAB2]",
 	},

@@ -14,7 +14,7 @@ const Navbar = () => {
 	const pathname = usePathname();
 	const [isScrolled, setIsScrolled] = useState(false);
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
-	const isLightPage = pathname !== "/";
+	const isLightPage = pathname !== "/" && pathname !== "/blog";
 
 	useEffect(() => {
 		const handleScroll = () => {
@@ -28,11 +28,6 @@ const Navbar = () => {
 		window.addEventListener("scroll", handleScroll);
 		return () => window.removeEventListener("scroll", handleScroll);
 	}, []);
-
-	// Reset menu state when pathname changes
-	useEffect(() => {
-		setIsMenuOpen(false);
-	}, [pathname]);
 
 	// Prevent scrolling when menu is open
 	useEffect(() => {
@@ -48,6 +43,7 @@ const Navbar = () => {
 
 	const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
+	if (pathname.includes("studio")) return null;
 	return (
 		<>
 			<div
@@ -68,10 +64,11 @@ const Navbar = () => {
 										? "/images/haiven-logo-blue.svg"
 										: "/images/haiven-logo-light.png"
 								}
-								width={256.08}
+								width={200.08}
 								height={70}
 								alt="Haiven Logo"
-								className="w-[100px] md:w-[180px] xl:w-[256px] h-auto"
+								loading="eager"
+								className="w-[100px] md:w-[180px] xl:w-[200px] h-auto"
 							/>
 						</Link>
 
@@ -81,7 +78,13 @@ const Navbar = () => {
 						</nav>
 
 						{/* Desktop button */}
-						<div className="hidden lg:block">
+						<div className="hidden lg:flex items-center gap-[18px]">
+							<Link
+								href="https://admin.haiven.net/sign-in"
+								className="text-white"
+							>
+								Login
+							</Link>
 							<NavbarDownload
 								isLightPage={isLightPage}
 								isScrolled={isScrolled}

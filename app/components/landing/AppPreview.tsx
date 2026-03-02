@@ -45,7 +45,7 @@ const AppPreview = () => {
 						alt="iphone with a preview of haiven mobile app"
 						width={659.23}
 						height={547.38}
-						className="lg:absolute -top-[200px] -right-20 bottom-20"
+						className="lg:absolute -top-[200px] -right-10 bottom-20"
 					/>
 				</div>
 			</div>

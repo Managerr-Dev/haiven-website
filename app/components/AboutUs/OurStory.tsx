@@ -33,7 +33,7 @@ const OurStory = () => {
 					</div>
 
 					<div className="max-w-[685.4px] mx-auto mt-[67.29px]">
-						<div className="flex flex-wrap items-center gap-4 lg:gap-[130px] mb-4 lg:mb-[118.61px]">
+						<div className="flex flex-col md:flex-row items-center gap-4 lg:gap-[130px] mb-4 lg:mb-[118.61px]">
 							<p className="font-medium text-[27.11px] leading-[40.67px] text-black">
 								Mission
 							</p>
@@ -44,7 +44,7 @@ const OurStory = () => {
 							</p>
 						</div>
 
-						<div className="flex flex-wrap items-center gap-4 lg:gap-[130px]">
+						<div className="flex flex-col md:flex-row items-center gap-4 lg:gap-[130px]">
 							<p className="font-medium text-[27.11px] leading-[40.67px] text-black">
 								Vision
 							</p>
