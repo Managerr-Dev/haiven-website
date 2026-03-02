@@ -146,3 +146,29 @@ export const POSTS_BY_TITLE_QUERY = `
   }
 }
 `;
+
+export const PAGINATED_POSTS_BY_TITLE_QUERY = `
+*[
+  _type == "post" && 
+  title match $title
+] | order(publishedAt desc) [$start...$end]{
+  _id,
+  title,
+  slug,
+  publishedAt,
+  body,
+  image,
+  excerpt,
+  tags[]->{
+    _id,
+    title,
+    slug
+  },
+  author->{
+    _id,
+    name,
+    title,
+    image
+  }
+}
+`;

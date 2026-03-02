@@ -6,6 +6,7 @@ import BlogCard from "../components/blog/BlogCard";
 import SectionBadge from "../components/landing/SectionBadge";
 import {
 	ALL_TAGS_QUERY,
+	PAGINATED_POSTS_BY_TITLE_QUERY,
 	PAGINATED_POSTS_BY_TAG_QUERY,
 	PAGINATED_POSTS_QUERY,
 } from "../lib/queries/Post";
@@ -18,6 +19,7 @@ const PAGE_SIZE = 9;
 type PageSearchParams = {
 	category?: string;
 	page?: string;
+	search?: string;
 };
 
 type PageProps = {
@@ -26,19 +28,26 @@ type PageProps = {
 
 const page = async ({ searchParams }: PageProps) => {
 	const params = (await searchParams) ?? {};
-	const selectedCategory = params.category;
+	const rawSearch = params.search ?? "";
+	const searchTerm = rawSearch.trim();
+	const hasSearch = !!searchTerm;
+
+	const selectedCategory = !hasSearch ? params.category : undefined;
 	const currentPage = Number(params.page) > 1 ? Number(params.page) : 1;
 
 	const start = (currentPage - 1) * PAGE_SIZE;
 	const end = start + PAGE_SIZE + 1;
 
-	const query = selectedCategory
-		? PAGINATED_POSTS_BY_TAG_QUERY
-		: PAGINATED_POSTS_QUERY;
+	const query = hasSearch
+		? PAGINATED_POSTS_BY_TITLE_QUERY
+		: selectedCategory
+			? PAGINATED_POSTS_BY_TAG_QUERY
+			: PAGINATED_POSTS_QUERY;
 
 	const fetchedPosts = await client.fetch<SanityDocument[]>(
 		query,
 		{
+			...(hasSearch ? { title: searchTerm } : {}),
 			...(selectedCategory ? { tagSlug: selectedCategory } : {}),
 			start,
 			end,
@@ -47,9 +56,7 @@ const page = async ({ searchParams }: PageProps) => {
 	);
 
 	const hasNextPage = fetchedPosts.length > PAGE_SIZE;
-	const posts = hasNextPage
-		? fetchedPosts.slice(0, PAGE_SIZE)
-		: fetchedPosts;
+	const posts = hasNextPage ? fetchedPosts.slice(0, PAGE_SIZE) : fetchedPosts;
 
 	const tags = await client.fetch<
 		{ _id: string; title: string; slug: { current: string } }[]
@@ -111,7 +118,7 @@ const page = async ({ searchParams }: PageProps) => {
 						and safety in modern communities.
 					</p>
 
-					<div className="flex gap-4 flex-wrap">
+					<div className="flex gap-4 flex-wrap items-center">
 						<Link href="/blog">
 							<Button
 								className={`text-[#FFFFFFB2] py-[8.6px] px-[15.47px] border-[0.69px] border-[#FFFFFF4D] rounded-[10.31px] shadow-[0px_0.86px_1.72px_0px_#1018280D] bg-transparent hover:bg-accent-green hover:text-white ${
@@ -139,6 +146,30 @@ const page = async ({ searchParams }: PageProps) => {
 								</Link>
 							);
 						})}
+
+						<form
+							className="flex items-center gap-2 ml-auto"
+							action="/blog"
+							method="GET"
+						>
+							{selectedCategory && (
+								<input type="hidden" name="category" value={selectedCategory} />
+							)}
+							<input
+								type="text"
+								name="search"
+								defaultValue={searchTerm}
+								placeholder="Search"
+								className="px-[12.03px] py-[8.6px] rounded-md text-sm text-black w-48 md:w-64 bg-white placeholder:text-[#7F7F7F] font-normal text-[13.75px] leading-[20.63px]"
+							/>
+							<Button
+								type="submit"
+								variant="outline"
+								className="bg-white/10 text-white border-[#FFFFFF4D]"
+							>
+								Search
+							</Button>
+						</form>
 					</div>
 				</div>
 			</div>
@@ -146,9 +177,7 @@ const page = async ({ searchParams }: PageProps) => {
 			<div className="max-w-[1127.67px] mx-auto px-4 pt-[85.95px]">
 				{posts.length === 0 ? (
 					<div className="py-16 text-center text-[#3C3C43]">
-						<p className="text-lg font-semibold mb-2">
-							No posts found
-						</p>
+						<p className="text-lg font-semibold mb-2">No posts found</p>
 						<p className="text-sm text-[#3C3C43B2]">
 							{selectedCategory
 								? "Try selecting a different category or view all posts."
@@ -168,57 +197,49 @@ const page = async ({ searchParams }: PageProps) => {
 						{currentPage > 1 ? (
 							<Link
 								href={
-									selectedCategory
-										? `/blog?category=${selectedCategory}&page=${
-												currentPage - 1
-										  }`
-										: `/blog?page=${currentPage - 1}`
+									hasSearch
+										? `/blog?search=${encodeURIComponent(
+												searchTerm,
+											)}&page=${currentPage - 1}`
+										: selectedCategory
+											? `/blog?category=${selectedCategory}&page=${
+													currentPage - 1
+												}`
+											: `/blog?page=${currentPage - 1}`
 								}
 							>
-								<Button
-									variant="outline"
-									className="px-4 py-2"
-								>
+								<Button variant="outline" className="px-4 py-2">
 									Previous
 								</Button>
 							</Link>
 						) : (
-							<Button
-								variant="outline"
-								className="px-4 py-2"
-								disabled
-							>
+							<Button variant="outline" className="px-4 py-2" disabled>
 								Previous
 							</Button>
 						)}
 
-						<span className="text-sm text-[#3C3C43B2]">
-							Page {currentPage}
-						</span>
+						<span className="text-sm text-[#3C3C43B2]">Page {currentPage}</span>
 
 						{hasNextPage ? (
 							<Link
 								href={
-									selectedCategory
-										? `/blog?category=${selectedCategory}&page=${
-												currentPage + 1
-										  }`
-										: `/blog?page=${currentPage + 1}`
+									hasSearch
+										? `/blog?search=${encodeURIComponent(
+												searchTerm,
+											)}&page=${currentPage + 1}`
+										: selectedCategory
+											? `/blog?category=${selectedCategory}&page=${
+													currentPage + 1
+												}`
+											: `/blog?page=${currentPage + 1}`
 								}
 							>
-								<Button
-									variant="outline"
-									className="px-4 py-2"
-								>
+								<Button variant="outline" className="px-4 py-2">
 									Next
 								</Button>
 							</Link>
 						) : (
-							<Button
-								variant="outline"
-								className="px-4 py-2"
-								disabled
-							>
+							<Button variant="outline" className="px-4 py-2" disabled>
 								Next
 							</Button>
 						)}
