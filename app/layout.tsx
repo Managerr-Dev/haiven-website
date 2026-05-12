@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Montserrat, Sora } from "next/font/google";
+import { Montserrat, Sora, Poppins } from "next/font/google";
 import "./globals.css";
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
@@ -14,12 +14,18 @@ const montserratSans = Montserrat({
 const soraSans = Sora({
 	variable: "--font-sora-sans",
 	subsets: ["latin"],
+	weight: "400",
+});
+
+const poppinsSans = Poppins({
+	variable: "--font-poppins-sans",
+	subsets: ["latin"],
+	weight: ["400", "500", "600", "700"],
 });
 
 const siteName = "Haiven";
 const companyName = "Haiven Smart Systems Limited";
 const url = "https://haiven.net";
-const residentUrl = "https://resident.haiven.net";
 
 export const metadata: Metadata = {
 	metadataBase: new URL(url),
@@ -120,7 +126,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 				/>
 			</head>
 			<body
-				className={`${montserratSans.variable} ${soraSans.variable} antialiased`}
+				className={`${montserratSans.variable} ${soraSans.variable} ${poppinsSans.variable} antialiased`}
 			>
 				<noscript>
 					<iframe
@@ -130,6 +136,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 						style={{ display: "none", visibility: "hidden" }}
 					></iframe>
 				</noscript>
+
 				<RecaptchaProvider>
 					<Navbar />
 					{children}
