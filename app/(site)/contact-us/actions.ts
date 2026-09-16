@@ -2,7 +2,7 @@
 
 import nodemailer from "nodemailer";
 import z from "zod";
-import { verifyRecaptcha } from "../lib/recaptcha";
+import { verifyRecaptcha } from "@/app/lib/recaptcha";
 
 const contactSchema = z.object({
 	first_name: z.string().min(2, "Name must be at least 2 characters"),

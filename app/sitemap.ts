@@ -6,6 +6,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
 	return [
 		{ url: `${baseUrl}/`, priority: 1 },
 
+		{ url: `${baseUrl}/caretaker`, priority: 0.9 },
+
 		{ url: `${baseUrl}/iot-solutions`, priority: 0.9 },
 
 		{ url: `${baseUrl}/features/access-control`, priority: 0.8 },

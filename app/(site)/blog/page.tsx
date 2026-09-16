@@ -2,14 +2,14 @@ import { client } from "@/sanity/lib/client";
 import { SanityDocument } from "next-sanity";
 import Image from "next/image";
 import Link from "next/link";
-import BlogCard from "../components/blog/BlogCard";
-import SectionBadge from "../components/landing/SectionBadge";
+import BlogCard from "@/app/components/blog/BlogCard";
+import SectionBadge from "@/app/components/landing/SectionBadge";
 import {
 	ALL_TAGS_QUERY,
 	PAGINATED_POSTS_BY_TITLE_QUERY,
 	PAGINATED_POSTS_BY_TAG_QUERY,
 	PAGINATED_POSTS_QUERY,
-} from "../lib/queries/Post";
+} from "@/app/lib/queries/Post";
 import { Button } from "@/components/ui/button";
 
 const options = { next: { revalidate: 30 } };
