@@ -55,7 +55,7 @@ const MobileMenu = ({ isOpen, onClose }: MobileMenuProps) => {
 	const navLinks = [
 		{ title: "About Us", href: "/about-us" },
 		{ title: "IOT Solutions", href: "/iot-solutions" },
-		{ title: "Blog", href: "/blog" },
+		{ title: "Caretaker", href: "/caretaker" },
 		{ title: "Contact Us", href: "/contact-us" },
 	];
 
@@ -117,14 +117,14 @@ const MobileMenu = ({ isOpen, onClose }: MobileMenuProps) => {
 				</Link>
 
 				<Link
-					href="/blog"
+					href="/caretaker"
 					className={cn(
 						"text-xl font-medium py-2 border-b border-white/10",
-						pathname === "/blog" ? "text-accent-green" : "text-white",
+						pathname === "/caretaker" ? "text-accent-green" : "text-white",
 					)}
 					onClick={onClose}
 				>
-					Blog
+					Caretaker
 				</Link>
 
 				<Link

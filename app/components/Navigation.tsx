@@ -137,9 +137,9 @@ const Navigation = ({ className, isScrolled, variant = "navbar" }: Props) => {
 							focusBg,
 							"focus:text-current",
 						)}
-						style={pathname === "/blog" ? activeStyle : {}}
+						style={pathname === "/caretaker" ? activeStyle : {}}
 					>
-						<Link href="/blog">Blog</Link>
+						<Link href="/caretaker">Caretaker</Link>
 					</NavigationMenuLink>
 				</NavigationMenuItem>
 				<NavigationMenuItem>
