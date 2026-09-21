@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import { Montserrat, Sora } from "next/font/google";
 import "./globals.css";
-import Footer from "./components/Footer";
-import Navbar from "./components/Navbar";
 import RecaptchaProvider from "./components/RecaptchaProvider";
 import Script from "next/script";
 
@@ -130,11 +128,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 						style={{ display: "none", visibility: "hidden" }}
 					></iframe>
 				</noscript>
-				<RecaptchaProvider>
-					<Navbar />
-					{children}
-					<Footer />
-				</RecaptchaProvider>
+				<RecaptchaProvider>{children}</RecaptchaProvider>
 			</body>
 		</html>
 	);

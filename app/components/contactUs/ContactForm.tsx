@@ -1,6 +1,6 @@
 "use client";
 
-import { submitContactForm } from "@/app/contact-us/actions";
+import { submitContactForm } from "@/app/(site)/contact-us/actions";
 import { Button } from "@/components/ui/button";
 import { startTransition, useActionState } from "react";
 import { useGoogleReCaptcha } from "react-google-recaptcha-v3";

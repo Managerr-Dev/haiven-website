@@ -43,7 +43,6 @@ const Navbar = () => {
 
 	const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
-	if (pathname.includes("studio")) return null;
 	return (
 		<>
 			<div

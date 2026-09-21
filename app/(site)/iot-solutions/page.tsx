@@ -1,7 +1,7 @@
 import React from "react";
-import Hero from "../components/IOTSolutions/Hero";
-import WhatWeDo from "../components/IOTSolutions/WhatWeDo";
-import EventsBlogs from "../components/IOTSolutions/EventsBlogs";
+import Hero from "@/app/components/IOTSolutions/Hero";
+import WhatWeDo from "@/app/components/IOTSolutions/WhatWeDo";
+import EventsBlogs from "@/app/components/IOTSolutions/EventsBlogs";
 import Image from "next/image";
 
 const page = () => {
