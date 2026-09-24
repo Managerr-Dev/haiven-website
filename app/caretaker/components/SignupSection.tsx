@@ -73,36 +73,38 @@ const SignupSection = () => {
 					publicly on 1 November. Tell us which one you are.
 				</p>
 
-				<div
-					role="tablist"
-					className="mb-9 inline-flex flex-wrap justify-center gap-1.5 rounded-full border border-[#E8EBF5] bg-white p-1.5"
-				>
-					{tabs.map((t) => {
-						const active = tab === t.id;
-						return (
-							<button
-								key={t.id}
-								type="button"
-								role="tab"
-								aria-selected={active}
-								onClick={() => setTab(t.id)}
-								className="relative cursor-pointer rounded-full border-none bg-transparent px-5 py-[11px] text-[14.5px] font-semibold"
-							>
-								<span
-									className={`absolute inset-0 rounded-full bg-[#1B2E6B] transition-opacity duration-200 ${
-										active ? "opacity-100" : "opacity-0"
-									}`}
-								/>
-								<span
-									className={`relative transition-colors duration-200 ${
-										active ? "text-white" : "text-[#6B7A9E]"
-									}`}
+				<div className="mb-9 lg:-mx-16">
+					<div
+						role="tablist"
+						className="inline-flex max-w-full flex-wrap justify-center gap-1.5 rounded-[28px] border border-[#E8EBF5] bg-white p-1.5 lg:flex-nowrap lg:rounded-full"
+					>
+						{tabs.map((t) => {
+							const active = tab === t.id;
+							return (
+								<button
+									key={t.id}
+									type="button"
+									role="tab"
+									aria-selected={active}
+									onClick={() => setTab(t.id)}
+									className="relative cursor-pointer rounded-full border-none bg-transparent px-5 py-[11px] text-[14.5px] font-semibold whitespace-nowrap"
 								>
-									{t.label}
-								</span>
-							</button>
-						);
-					})}
+									<span
+										className={`absolute inset-0 rounded-full bg-[#1B2E6B] transition-opacity duration-200 ${
+											active ? "opacity-100" : "opacity-0"
+										}`}
+									/>
+									<span
+										className={`relative transition-colors duration-200 ${
+											active ? "text-white" : "text-[#6B7A9E]"
+										}`}
+									>
+										{t.label}
+									</span>
+								</button>
+							);
+						})}
+					</div>
 				</div>
 
 				<div className="rounded-[20px] border border-[#E8EBF5] bg-white p-[34px] text-left shadow-[0_20px_50px_rgba(27,46,107,0.07)]">

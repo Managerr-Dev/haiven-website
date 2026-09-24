@@ -12,13 +12,13 @@ const Hero = () => {
 					<h1 className="mb-6 font-alan text-[clamp(38px,4.6vw,62px)] leading-[1.04] font-semibold tracking-[-0.02em] text-balance text-[#16234A]">
 						Who is looking after your property when you&rsquo;re not there?
 					</h1>
-					<p className="mb-5 max-w-[38em] text-[18px] leading-[1.6] text-pretty text-[#6B7A9E]">
+					<p className="mb-3 max-w-[38em] text-[18px] leading-[1.6] text-pretty text-[#6B7A9E]">
 						Run your property from your phone with one system for records, work
-						orders, payments, access and reporting. When you need physical
-						presence, add a certified Caretaker on the ground.
+						orders, payments, access and reporting.
 					</p>
-					<p className="mb-8 text-[16.5px] leading-[1.6] font-medium text-[#16234A]">
-						Every job recorded. Every naira accounted for. Every decision yours.
+					<p className="mb-8 max-w-[38em] text-[18px] leading-[1.6] text-pretty text-[#6B7A9E]">
+						When you need physical presence, add a certified Caretaker on the
+						ground.
 					</p>
 					<div className="flex flex-wrap items-center gap-3">
 						<ScrollLink
