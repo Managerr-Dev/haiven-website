@@ -1,147 +1,177 @@
+import {
+	Check,
+	ClipboardCheck,
+	House,
+	type LucideIcon,
+	ShieldCheck,
+	SlidersHorizontal,
+} from "lucide-react";
+import type { PlanName } from "../data";
+import CaretakerSupport from "./CaretakerSupport";
+import PlanComparison from "./PlanComparison";
 import PlanInterestButton from "./PlanInterestButton";
-import ScrollLink from "./ScrollLink";
 
-const featureList = (items: string[], tone: "light" | "dark") => (
-	<ul
-		className={`m-0 mb-[26px] flex list-none flex-col gap-2.5 p-0 text-[14.5px] ${
-			tone === "dark" ? "text-[#E8EBF5]" : "text-[#16234A]"
-		}`}
-	>
-		{items.map((item) => (
-			<li key={item}>{item}</li>
-		))}
-	</ul>
-);
+const plans: {
+	name: PlanName;
+	icon: LucideIcon;
+	promise: string;
+	benefits: string[];
+	price: React.ReactNode;
+	cta: string;
+	recommended?: boolean;
+}[] = [
+	{
+		name: "Free",
+		icon: House,
+		promise: "Keep a small property organised.",
+		benefits: [
+			"1 property · 6 tenants",
+			"1 admin account",
+			"Records, bills & issues",
+		],
+		price: (
+			<>
+				₦0 <span className="text-[13px] font-normal text-(--ct-muted)">/ month</span>
+			</>
+		),
+		cta: "Join free waitlist",
+	},
+	{
+		name: "Essential",
+		icon: SlidersHorizontal,
+		promise: "Run it with less admin.",
+		benefits: [
+			"More tenants · 3 admins",
+			"Automatic bills & renewals",
+			"Reports & team access",
+		],
+		price: "Paid plan",
+		cta: "Get pricing",
+		recommended: true,
+	},
+	{
+		name: "Managed",
+		icon: ClipboardCheck,
+		promise: "Let Haiven follow through.",
+		benefits: [
+			"Weekly owner reports",
+			"Follow-up on open issues",
+			"Works with your team",
+		],
+		price: "Service plan",
+		cta: "Discuss support",
+	},
+	{
+		name: "Secure+",
+		icon: ShieldCheck,
+		promise: "Add security oversight.",
+		benefits: [
+			"Camera & access integration",
+			"Monitoring & incident records",
+			"Agreed incident escalation",
+		],
+		price: "Custom quote",
+		cta: "Get assessed",
+	},
+];
 
 const PlansSection = () => {
 	return (
 		<section
 			id="plans"
-			className="scroll-mt-24 border-y border-[#E8EBF5] bg-white"
+			className="ct-plans scroll-mt-24 bg-(--ct-bg) text-(--ct-ink)"
 		>
 			<div className="mx-auto max-w-[1180px] px-6 py-16 md:py-[88px]">
-				<h2 className="mb-4 font-alan text-[clamp(28px,3.2vw,40px)] leading-[1.12] font-semibold tracking-[-0.015em] text-[#16234A]">
-					Choose the setup that fits your property
-				</h2>
-				<p className="mb-12 text-[17px] leading-[1.6] text-[#6B7A9E]">
-					Start with software. Add people and deeper operational support when your
-					property needs it.
-				</p>
+				<header className="mx-auto mb-12 max-w-[620px] text-center">
+					<p className="mb-3 text-[12px] font-semibold tracking-[0.15em] text-(--ct-muted) uppercase">
+						Caretaker plans
+					</p>
+					<h2 className="mb-4 font-alan text-[clamp(30px,4.2vw,44px)] leading-[1.12] font-semibold tracking-[-0.025em] text-(--ct-ink)">
+						Start free. Add support
+						<br />
+						when you need it.
+					</h2>
+					<p className="mx-auto max-w-[440px] text-[16px] leading-[1.65] text-(--ct-muted)">
+						Choose how you run your property. A physical caretaker is always
+						optional.
+					</p>
+				</header>
 
-				<p className="mb-5 text-[11px] font-semibold tracking-[0.13em] text-[#6B7A9E] uppercase">
-					Software
-				</p>
-				<div className="grid grid-cols-1 gap-5 md:grid-cols-2">
-					<div className="flex flex-col rounded-[18px] border border-[#E8EBF5] bg-[#FAFBFD] p-[30px]">
-						<p className="mb-1.5 font-alan text-[20px] font-semibold text-[#16234A]">
-							Free
-						</p>
-						<p className="mb-[18px] text-[14.5px] text-[#6B7A9E]">
-							For getting started
-						</p>
-						<p className="mb-[22px] text-[13.5px] font-semibold text-[#00A344]">
-							Free while you&rsquo;re running one property
-						</p>
-						{featureList(
-							[
-								"Unit and tenant records",
-								"Owner dashboard",
-								"Complaint log",
-								"Visitor register",
-								"Bill reminders",
-							],
-							"light",
-						)}
-						<ScrollLink
-							target="signup"
-							className="mt-auto rounded-[12px] bg-[#00C853] px-5 py-[13px] text-center text-[15px] font-semibold text-[#0B2E1B] transition-colors hover:bg-[#00B84A]"
-						>
-							Start free
-						</ScrollLink>
-					</div>
-
-					<div className="flex flex-col rounded-[18px] border border-[#E8EBF5] bg-[#FAFBFD] p-[30px]">
-						<p className="mb-1.5 font-alan text-[20px] font-semibold text-[#16234A]">
-							Essential
-						</p>
-						<p className="mb-[18px] text-[14.5px] text-[#6B7A9E]">
-							For running the property digitally
-						</p>
-						<p className="mb-[22px] text-[13.5px] font-semibold text-[#6B7A9E]">
-							Pricing confirmed at launch
-						</p>
-						{featureList(
-							[
-								"Everything in Free",
-								"Tenant app and payments",
-								"Full reporting",
-								"Multi-property dashboard",
-							],
-							"light",
-						)}
-						<PlanInterestButton plan="Essential" variant="outline" />
-					</div>
+				<div className="grid grid-cols-1 gap-x-4 gap-y-7 min-[480px]:grid-cols-2 lg:grid-cols-4">
+					{plans.map((plan) => {
+						const Icon = plan.icon;
+						const dark = plan.recommended;
+						return (
+							<article
+								key={plan.name}
+								className={`relative flex min-w-0 flex-col rounded-[14px] border px-5 pt-6 pb-5 ${
+									dark
+										? "border-[#1B2E6B] bg-[#1B2E6B] text-white"
+										: "border-(--ct-line) bg-(--ct-paper) text-(--ct-ink)"
+								}`}
+							>
+								{dark && (
+									<div className="absolute -top-3 left-4 rounded-[5px] bg-[#00C853] px-2.5 py-[5px] text-[12px] font-bold tracking-[0.02em] whitespace-nowrap text-[#0B2B32]">
+										Recommended
+									</div>
+								)}
+								<div
+									className={`mt-1 mb-4 flex h-10 w-10 flex-none items-center justify-center rounded-[9px] ${
+										dark ? "bg-[#344783] text-white" : "bg-(--ct-soft)"
+									}`}
+								>
+									<Icon aria-hidden="true" className="h-5 w-5" strokeWidth={1.65} />
+								</div>
+								<h3 className="mb-2 font-alan text-[22px] leading-[1.2] font-semibold tracking-[-0.02em]">
+									{plan.name}
+								</h3>
+								<p
+									className={`mb-5 min-h-[44px] text-[14.5px] leading-[1.5] ${
+										dark ? "text-[#D3DCF2]" : "text-(--ct-muted)"
+									}`}
+								>
+									{plan.promise}
+								</p>
+								<ul
+									className={`m-0 mb-5 flex flex-1 list-none flex-col gap-3 border-t p-0 pt-4 ${
+										dark ? "border-[#4B5B8C]" : "border-(--ct-line)"
+									}`}
+								>
+									{plan.benefits.map((benefit) => (
+										<li
+											key={benefit}
+											className="flex items-start gap-2 text-[14px] leading-[1.5]"
+										>
+											<Check
+												aria-hidden="true"
+												strokeWidth={2.25}
+												className={`mt-[4px] h-3.5 w-3.5 flex-none ${
+													dark ? "text-[#56DE90]" : "text-(--ct-check)"
+												}`}
+											/>
+											<span>{benefit}</span>
+										</li>
+									))}
+								</ul>
+								<p className="mb-3 min-h-[21px] text-[14px] leading-[1.5] font-semibold">
+									{plan.price}
+								</p>
+								<PlanInterestButton
+									plan={plan.name}
+									label={plan.cta}
+									variant={dark ? "solid" : "outline"}
+								/>
+							</article>
+						);
+					})}
 				</div>
 
-				<div className="my-[52px] h-px bg-[#E8EBF5]" />
+				<PlanComparison />
 
-				<p className="mb-5 text-[11px] font-semibold tracking-[0.13em] text-[#6B7A9E] uppercase">
-					With a certified Caretaker
-				</p>
-				<div className="grid grid-cols-1 gap-5 md:grid-cols-2">
-					<div className="flex flex-col rounded-[18px] border border-[#13214F] bg-[#13214F] p-[30px]">
-						<div className="mb-1.5 flex items-center justify-between gap-3">
-							<p className="font-alan text-[20px] font-semibold text-white">
-								Managed
-							</p>
-							<span className="rounded-full bg-[#00C853] px-2.5 py-[5px] text-[11px] font-semibold tracking-[0.09em] text-[#0B2E1B] uppercase">
-								Recommended
-							</span>
-						</div>
-						<p className="mb-[18px] text-[14.5px] text-[#B9C4DF]">
-							For properties that need a certified Caretaker
-						</p>
-						<p className="mb-[22px] text-[13.5px] font-semibold text-[#8FA0C6]">
-							Pricing confirmed at launch
-						</p>
-						{featureList(
-							[
-								"Everything in Essential",
-								"Certified Caretaker placed",
-								"Training and supervision",
-								"Weekly owner reporting",
-							],
-							"dark",
-						)}
-						<PlanInterestButton plan="Managed" variant="solid" />
-					</div>
+				<CaretakerSupport />
 
-					<div className="flex flex-col rounded-[18px] border border-[#E8EBF5] bg-[#FAFBFD] p-[30px]">
-						<p className="mb-1.5 font-alan text-[20px] font-semibold text-[#16234A]">
-							Secure+
-						</p>
-						<p className="mb-[18px] text-[14.5px] text-[#6B7A9E]">
-							For properties that need tighter operational and security support
-						</p>
-						<p className="mb-[22px] text-[13.5px] font-semibold text-[#6B7A9E]">
-							Pricing confirmed at launch
-						</p>
-						{featureList(
-							[
-								"Everything in Managed",
-								"Camera and security integration",
-								"Monitoring and incident workflow",
-								"Priority emergency response",
-							],
-							"light",
-						)}
-						<PlanInterestButton plan="Secure+" variant="outline" />
-					</div>
-				</div>
-
-				<p className="mt-9 text-[15px] text-[#6B7A9E]">
-					Not sure which fits? Apply for the Demo and we&rsquo;ll recommend the
-					best setup for your property.
+				<p className="mt-6 text-center text-[13.5px] leading-[1.6] text-(--ct-muted)">
+					Paid pricing confirmed at launch. Hardware quoted separately.
 				</p>
 			</div>
 		</section>
