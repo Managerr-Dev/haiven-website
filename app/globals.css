@@ -212,3 +212,16 @@
 		@apply bg-background text-foreground;
 	}
 }
+
+/* Caretaker plans section — colour tokens from the section design, which
+   follows the visitor's system light/dark preference. */
+.ct-plans {
+	color-scheme: light dark;
+	--ct-ink: light-dark(#1b2e6b, #f0f3fd);
+	--ct-muted: light-dark(#57637a, #afbcd5);
+	--ct-paper: light-dark(#ffffff, #142447);
+	--ct-bg: light-dark(#f5f7fa, #0b1733);
+	--ct-line: light-dark(#dbe1ec, #324264);
+	--ct-soft: light-dark(#e8ebf5, #24375b);
+	--ct-check: light-dark(#218146, #64d69a);
+}
