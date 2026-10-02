@@ -2,29 +2,10 @@
 
 import { ArrowUpRight } from "lucide-react";
 import Image from "next/image";
-import { useState } from "react";
-
-type StaffNeed = "existing" | "new";
-
-const staffOptions: { key: StaffNeed; label: string; detail: string }[] = [
-	{
-		key: "existing",
-		label: "I have a caretaker",
-		detail:
-			"Give your caretaker a staff account on Essential, or add Haiven supervision through Managed.",
-	},
-	{
-		key: "new",
-		label: "Help me find one",
-		detail:
-			"Ask Haiven about recruitment, training and placement alongside Managed or Secure+. Coverage and costs are agreed before you commit.",
-	},
-];
+import { useSignup } from "./signup-context";
 
 const CaretakerSupport = () => {
-	const [open, setOpen] = useState(false);
-	const [need, setNeed] = useState<StaffNeed>("existing");
-	const detail = staffOptions.find((o) => o.key === need)?.detail;
+	const { goToSignup } = useSignup();
 
 	return (
 		<div className="grid grid-cols-1 overflow-hidden rounded-[14px] border border-(--ct-line) bg-(--ct-paper) sm:grid-cols-[35%_minmax(0,1fr)]">
@@ -47,9 +28,7 @@ const CaretakerSupport = () => {
 				</p>
 				<button
 					type="button"
-					aria-expanded={open}
-					aria-controls="caretaker-support-more"
-					onClick={() => setOpen((v) => !v)}
+					onClick={() => goToSignup("property")}
 					className="inline-flex min-h-8 cursor-pointer items-center gap-2 py-1 text-left text-[15px] font-semibold text-(--ct-ink)"
 				>
 					Explore caretaker support
@@ -57,43 +36,6 @@ const CaretakerSupport = () => {
 				</button>
 				<p className="mt-2 text-[13.5px] leading-[1.5] text-(--ct-muted)">
 					Personnel costs are quoted separately.
-				</p>
-			</div>
-			<div
-				id="caretaker-support-more"
-				hidden={!open}
-				className="border-t border-(--ct-line) px-6 pt-5 pb-6 sm:col-span-2 sm:px-8"
-			>
-				<div
-					role="group"
-					aria-label="Your caretaker needs"
-					className="mb-3 flex flex-wrap gap-2"
-				>
-					{staffOptions.map((option) => (
-						<button
-							key={option.key}
-							type="button"
-							aria-pressed={need === option.key}
-							onClick={() => setNeed(option.key)}
-							className={`min-h-11 cursor-pointer rounded-[8px] border px-3.5 py-2.5 text-[14px] leading-[1.4] font-medium transition-colors ${
-								need === option.key
-									? "border-(--ct-ink) bg-(--ct-ink) text-(--ct-bg)"
-									: "border-(--ct-line) bg-(--ct-paper) text-(--ct-ink) hover:bg-(--ct-soft)"
-							}`}
-						>
-							{option.label}
-						</button>
-					))}
-				</div>
-				<p
-					aria-live="polite"
-					className="mb-2 text-[15px] leading-[1.6] text-(--ct-muted)"
-				>
-					{detail}
-				</p>
-				<p className="text-[13.5px] leading-[1.5] text-(--ct-muted)">
-					Placement, duties and working hours are agreed in advance. The landlord
-					pays the caretaker&rsquo;s salary directly.
 				</p>
 			</div>
 		</div>
