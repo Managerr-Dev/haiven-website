@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { ROLES } from "./(site)/careers/data";
 
 export default function sitemap(): MetadataRoute.Sitemap {
 	const baseUrl = "https://haiven.net";
@@ -15,6 +16,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
 		{ url: `${baseUrl}/features/smart-metering`, priority: 0.8 },
 		{ url: `${baseUrl}/features/utilities-vending`, priority: 0.8 },
 		{ url: `${baseUrl}/features/facility-booking`, priority: 0.8 },
+
+		{ url: `${baseUrl}/careers`, priority: 0.7 },
+		...ROLES.map((role) => ({
+			url: `${baseUrl}/careers/${role.slug}`,
+			priority: 0.6,
+		})),
 
 		{ url: `${baseUrl}/about-us`, priority: 0.5 },
 		{ url: `${baseUrl}/contact-us`, priority: 0.5 },

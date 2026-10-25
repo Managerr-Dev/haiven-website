@@ -138,6 +138,17 @@ const MobileMenu = ({ isOpen, onClose }: MobileMenuProps) => {
 					Contact Us
 				</Link>
 
+				<Link
+					href="/careers"
+					className={cn(
+						"text-xl font-medium py-2 border-b border-white/10",
+						pathname.startsWith("/careers") ? "text-accent-green" : "text-white",
+					)}
+					onClick={onClose}
+				>
+					Careers
+				</Link>
+
 				<div className="pt-8 space-y-2">
 					<div className="flex justify-center">
 						<Link
