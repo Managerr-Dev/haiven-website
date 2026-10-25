@@ -159,6 +159,23 @@ const Navigation = ({ className, isScrolled, variant = "navbar" }: Props) => {
 						<Link href="/contact-us">Contact Us</Link>
 					</NavigationMenuLink>
 				</NavigationMenuItem>
+				<NavigationMenuItem>
+					<NavigationMenuLink
+						asChild
+						className={cn(
+							navigationMenuTriggerStyle(),
+							"bg-transparent transition-colors",
+							textColor,
+							hoverBg,
+							"hover:text-current",
+							focusBg,
+							"focus:text-current",
+						)}
+						style={pathname.startsWith("/careers") ? activeStyle : {}}
+					>
+						<Link href="/careers">Careers</Link>
+					</NavigationMenuLink>
+				</NavigationMenuItem>
 			</NavigationMenuList>
 		</NavigationMenu>
 	);
