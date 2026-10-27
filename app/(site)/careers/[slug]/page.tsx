@@ -198,7 +198,7 @@ export default async function RolePage({ params }: Props) {
 								fill
 								priority
 								sizes="(min-width: 1080px) 760px, 100vw"
-								className="object-cover"
+								className="object-cover object-[center_20%]"
 							/>
 						</div>
 						{role.sections.map((section) => (

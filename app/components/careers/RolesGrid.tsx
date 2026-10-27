@@ -54,7 +54,7 @@ export default function RolesGrid({ roles }: { roles: Role[] }) {
 								alt=""
 								fill
 								sizes="(min-width: 1000px) 576px, 100vw"
-								className="object-cover"
+								className="object-cover object-top"
 							/>
 						</div>
 						<div className="flex flex-1 flex-col gap-3.5 px-[26px] pt-6 pb-[26px]">
