@@ -129,12 +129,12 @@ export default function CareersPage() {
 					</div>
 					<div className="relative mt-[clamp(40px,5vw,64px)] h-[clamp(240px,40vw,520px)] overflow-hidden rounded-3xl">
 						<Image
-							src="/images/careers/role-facility-manager.jpg"
+							src="/images/careers/careers-hero.jpg"
 							alt="Haiven team members walking through a Lagos estate"
 							fill
 							priority
 							sizes="(min-width: 1200px) 1152px, 100vw"
-							className="object-cover"
+							className="object-cover object-[center_15%]"
 						/>
 					</div>
 				</div>
