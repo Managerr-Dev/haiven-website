@@ -19,7 +19,7 @@ import {
 } from "./validation";
 
 /** Every application and talent-pool sign-up is sent to these inboxes. */
-const RECIPIENTS = ["haivenmanagerr@gmail.com", "joshua.biyere@gmail.com"];
+const RECIPIENTS = ["haivenmanager@gmail.com", "joshua.biyere@gmail.com"];
 
 export type CareersResult =
 	| { success: true }
