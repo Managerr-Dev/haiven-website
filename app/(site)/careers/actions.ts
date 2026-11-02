@@ -2,6 +2,7 @@
 
 import nodemailer from "nodemailer";
 import type { Attachment } from "nodemailer/lib/mailer";
+import { formatNigerianMobile, toNigerianMobile } from "@/app/lib/phone";
 import { verifyRecaptcha } from "@/app/lib/recaptcha";
 import { getRole, isClosed } from "./data";
 import {
@@ -177,7 +178,8 @@ export async function submitApplication(
 
 	const variant = values.techRole || values.growthRole;
 	const roleLabel = role.title + (variant ? ` (${variant})` : "");
-	const phone = `+234 ${values.phone}`;
+	// Validated above, so the number always parses.
+	const phone = formatNigerianMobile(toNigerianMobile(values.phone)!);
 
 	const { html, text } = renderRows([
 		["Role", roleLabel],
@@ -283,7 +285,7 @@ export async function joinTalentPool(
 	const { html, text } = renderRows([
 		["Name", values.name],
 		["Email", values.email],
-		["Phone", `+234 ${values.phone}`],
+		["Phone", formatNigerianMobile(toNigerianMobile(values.phone)!)],
 		["Area of interest", values.area],
 		["Consents to assessment", yesNo(values.consent1)],
 		["Keep details for 12 months", yesNo(values.consent2)],

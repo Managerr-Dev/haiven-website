@@ -1,3 +1,5 @@
+import { toNigerianMobile } from "@/app/lib/phone";
+
 export type FieldKind = "text" | "email" | "phone" | "units";
 
 export type FieldRule = [name: string, kind: FieldKind, message: string];
@@ -5,7 +7,7 @@ export type FieldRule = [name: string, kind: FieldKind, message: string];
 export function isValid(value: string, kind: FieldKind): boolean {
 	const v = (value || "").trim();
 	if (kind === "email") return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v);
-	if (kind === "phone") return v.replace(/[^0-9]/g, "").length >= 10;
+	if (kind === "phone") return toNigerianMobile(v) !== null;
 	if (kind === "units") return Number(v) >= 1;
 	return v.length > 1;
 }
@@ -32,7 +34,7 @@ export const nameRule: FieldRule = [
 export const phoneRule: FieldRule = [
 	"phone_number",
 	"phone",
-	"Enter a phone number we can reach you on, at least 10 digits.",
+	"Enter a Nigerian mobile number, for example 0801 234 5678.",
 ];
 export const emailRule: FieldRule = [
 	"email",

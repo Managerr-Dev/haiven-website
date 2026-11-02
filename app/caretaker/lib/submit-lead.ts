@@ -14,6 +14,8 @@
  * The backend must allow this site's origin via CORS for the fetch to succeed.
  */
 
+import { toE164, toNigerianMobile } from "@/app/lib/phone";
+
 export type LeadEndpoint = "waitlist" | "demo-request" | "training-application";
 
 export type LeadResult =
@@ -29,7 +31,10 @@ const RATE_LIMIT_MESSAGE =
 /** Give the external API this long before we give up on it. */
 const TIMEOUT_MS = 15_000;
 
-/** Build the JSON body: trim, drop empty values, send `number_of_units` as an int. */
+/**
+ * Build the JSON body: trim, drop empty values, send `number_of_units` as an
+ * int and `phone_number` as +234XXXXXXXXXX.
+ */
 function buildPayload(formData: FormData): Record<string, unknown> {
 	const payload: Record<string, unknown> = {};
 	for (const [key, raw] of formData.entries()) {
@@ -39,6 +44,11 @@ function buildPayload(formData: FormData): Record<string, unknown> {
 		if (key === "number_of_units") {
 			const n = Number(value);
 			if (Number.isInteger(n) && n > 0) payload[key] = n;
+			continue;
+		}
+		if (key === "phone_number") {
+			const digits = toNigerianMobile(value);
+			payload[key] = digits ? toE164(digits) : value;
 			continue;
 		}
 		payload[key] = value;

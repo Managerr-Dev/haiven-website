@@ -12,7 +12,7 @@ export const revalidate = 3600;
 
 export const metadata: Metadata = {
 	title: {
-		absolute: "Careers at Haiven | Help us run the properties Lagos lives in",
+		absolute: "Careers at Haiven | Better properties. Better communities. Built by people like you.",
 	},
 	description:
 		"Haiven is hiring its first operations and growth team in Lagos. See open roles and how we hire.",
@@ -103,12 +103,15 @@ export default function CareersPage() {
 						Careers at Haiven
 					</p>
 					<h1 className="mt-[18px] mb-[22px] max-w-[860px] text-[clamp(40px,5.6vw,68px)] font-extrabold leading-[1.04] tracking-[-0.03em] text-balance text-[#1B2E6B]">
-						Help us run the properties communities live in.
+						Better properties. Better communities. Built by people like you.
 					</h1>
 					<p className="max-w-[680px] text-[clamp(17px,1.5vw,20px)] leading-[1.6] text-pretty text-[#363C52]">
-						We build the system that runs estates, apartment buildings and
-						markets across Lagos: gates, power, payments and security. Now
-						we&apos;re hiring the people who take it onto the ground.
+						At Haiven, we&apos;re changing how the places people live and work
+						are managed. We connect the systems that keep properties running,
+						making everyday experiences safer, simpler and more reliable.
+					</p>
+					<p className="mt-4 max-w-[680px] text-[clamp(17px,1.5vw,20px)] leading-[1.6] text-pretty text-[#363C52]">
+						Join the team bringing that change to life.
 					</p>
 					<div className="mt-[34px] flex flex-wrap items-center gap-x-7 gap-y-4">
 						<a

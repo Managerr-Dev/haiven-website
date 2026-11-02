@@ -29,7 +29,7 @@ const AppPreview = () => {
 								/>
 							</Link>
 
-							<Link href="https://apps.apple.com/ng/app/haiven/id6737174043">
+							<Link href="https://apps.apple.com/app/id6737174043">
 								<Image
 									src="/images/app-store.png"
 									alt="gooole"
