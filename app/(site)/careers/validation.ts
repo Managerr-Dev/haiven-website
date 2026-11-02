@@ -1,3 +1,4 @@
+import { toNigerianMobile } from "@/app/lib/phone";
 import type { RoleSlug } from "./data";
 
 /**
@@ -86,6 +87,14 @@ export const formatBytes = (b: number) =>
 		? `${(b / 1048576).toFixed(1)} MB`
 		: `${Math.max(1, Math.round(b / 1024))} KB`;
 
+/** Returns an error message for a phone number, or undefined when it's fine. */
+export function checkPhone(phone: string) {
+	if (!phone.trim()) return "Add your phone number so we can call you.";
+	if (!toNigerianMobile(phone))
+		return "That doesn't look like a Nigerian mobile number. Use the 10 digits after +234, for example 803 123 4567.";
+	return undefined;
+}
+
 /** Returns an error message for a CV file, or undefined when it's fine. */
 export function checkCv(file: { name: string; size: number } | null) {
 	if (!file || file.size === 0)
@@ -108,11 +117,8 @@ export function validateApplication(
 		e.email = "Add your email address so we can reply to you.";
 	else if (!isEmail(v.email))
 		e.email = "That email address looks incomplete. Check it and try again.";
-	const digits = v.phone.replace(/\D/g, "");
-	if (!digits) e.phone = "Add your phone number so we can call you.";
-	else if (digits.length < 10)
-		e.phone =
-			"That phone number looks too short. Use 10 digits after +234, for example 803 123 4567.";
+	const phoneError = checkPhone(v.phone);
+	if (phoneError) e.phone = phoneError;
 	if (!v.area) e.area = "Choose the area you live in.";
 	if (!v.exp) e.exp = "Choose your years of relevant experience.";
 	if (!v.start) e.start = "Tell us when you could start.";
@@ -158,8 +164,8 @@ export function validateTalentPool(
 	if (!v.name.trim()) e.name = "Add your full name.";
 	if (!v.email.trim()) e.email = "Add your email address so we can contact you.";
 	else if (!isEmail(v.email)) e.email = "That email address looks incomplete.";
-	if (!v.phone.replace(/\D/g, ""))
-		e.phone = "Add your phone number so we can call you.";
+	const phoneError = checkPhone(v.phone);
+	if (phoneError) e.phone = phoneError;
 	if (!v.area) e.area = "Choose the area that interests you most.";
 	const cvError = cv ? checkCv(cv) : "Attach your CV.";
 	if (cvError) e.cv = cvError;
