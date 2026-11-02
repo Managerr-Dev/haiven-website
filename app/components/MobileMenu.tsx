@@ -47,7 +47,7 @@ const MobileMenu = ({ isOpen, onClose }: MobileMenuProps) => {
 		const userAgent = navigator.userAgent || navigator.vendor;
 		const isApple = /iPad|iPhone|iPod|Macintosh/.test(userAgent);
 		const url = isApple
-			? "https://apps.apple.com/app/id6478140231"
+			? "https://apps.apple.com/app/id6737174043"
 			: "https://play.google.com/store/apps/details?id=com.anonymous.haiven";
 		window.open(url, "_blank");
 	};
