@@ -2,10 +2,12 @@
 
 import { Menu, X } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import { useState } from "react";
 import { scrollToId } from "./ScrollLink";
 
 const navLinks = [
+	{ label: "Top", target: "top" },
 	{ label: "What it runs", target: "runs" },
 	{ label: "Product", target: "product" },
 	{ label: "Plans", target: "plans" },
@@ -23,7 +25,11 @@ const CaretakerHeader = () => {
 	return (
 		<header className="sticky top-0 z-60 border-b border-[#E8EBF5] bg-[#FAFBFD]/[0.88] backdrop-blur-[10px]">
 			<div className="mx-auto flex max-w-[1180px] items-center justify-between gap-6 px-6 py-3.5">
-				<a href="#top" onClick={go("top")} className="flex items-center gap-2.5">
+				<Link
+					href="/"
+					aria-label="Haiven home page"
+					className="flex items-center gap-2.5"
+				>
 					<Image
 						src="/images/caretaker/caretaker-logo.svg"
 						alt="Caretaker by Haiven"
@@ -32,7 +38,7 @@ const CaretakerHeader = () => {
 						className="h-[26px] w-auto"
 						priority
 					/>
-				</a>
+				</Link>
 
 				<nav className="hidden items-center gap-7 md:flex">
 					{navLinks.map((link) => (
