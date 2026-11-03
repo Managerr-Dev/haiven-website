@@ -33,6 +33,8 @@ export interface Role {
 	photo2?: { src: string; alt: string; caption: string };
 	/** Show the Certified Caretaker strip at the bottom of the role page. */
 	strip: boolean;
+	/** Stop applications for this role before the shared closing date. */
+	closed?: boolean;
 	minSalary: number;
 	maxSalary: number;
 	sections: RoleSection[];
@@ -45,8 +47,8 @@ export const DATE_POSTED = "2026-10-21";
 export const CLOSES_AT = new Date("2026-11-30T23:59:59+01:00");
 export const CLOSES_LABEL = "30 November 2026";
 
-export function isClosed(now = new Date()) {
-	return now > CLOSES_AT;
+export function isClosed(role: Role, now = new Date()) {
+	return Boolean(role.closed) || now > CLOSES_AT;
 }
 
 const IMG = "/images/careers";
@@ -386,13 +388,14 @@ export const ROLES: Role[] = [
 			"12-month graduate programme",
 			"₦150,000–₦180,000 a month",
 			"Open to new graduates only",
-			`Closes ${CLOSES_LABEL}`,
+			"Applications closed",
 		],
 		cardImage: `${IMG}/role-customer-success-associate.jpg`,
 		photo: `${IMG}/role-customer-success-associate.jpg`,
 		photoAlt:
 			"A customer success associate on a call with the Haiven dashboard open",
 		strip: false,
+		closed: true,
 		minSalary: 150000,
 		maxSalary: 180000,
 		sections: [
@@ -554,7 +557,7 @@ export const FAQS = [
 	},
 	{
 		q: "Do I need property or tech experience?",
-		a: "It depends on the role. Each role page says exactly what we need. The Technician Trainee and Customer Success roles are open to people starting out.",
+		a: "It depends on the role. Each role page says exactly what we need. The Technician Trainee role is open to people starting out.",
 	},
 	{
 		q: "Can I apply for more than one role?",
