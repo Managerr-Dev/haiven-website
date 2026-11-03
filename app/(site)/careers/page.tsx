@@ -83,7 +83,7 @@ function TalentPoolCard() {
 }
 
 export default function CareersPage() {
-	const roles = isClosed() ? [] : ROLES;
+	const roles = ROLES.filter((r) => !isClosed(r));
 	const hasRoles = roles.length > 0;
 
 	return (

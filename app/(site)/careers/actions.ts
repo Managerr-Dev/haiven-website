@@ -118,7 +118,7 @@ export async function submitApplication(
 ): Promise<CareersResult> {
 	const role = getRole(str(formData, "role"));
 	if (!role) return { success: false, message: RETRY_MESSAGE };
-	if (isClosed())
+	if (isClosed(role))
 		return {
 			success: false,
 			message:

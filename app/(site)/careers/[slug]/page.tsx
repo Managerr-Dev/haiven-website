@@ -30,7 +30,7 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
 	const role = getRole((await params).slug);
 	if (!role) return {};
-	const description = `${role.short} at Haiven. ${role.sLoc}. ${role.sSalary}. Closes ${CLOSES_LABEL}.`;
+	const description = `${role.short} at Haiven. ${role.sLoc}. ${role.sSalary}. ${role.closed ? "Applications closed" : `Closes ${CLOSES_LABEL}`}.`;
 	return {
 		title: { absolute: `${role.title} | Careers at Haiven` },
 		description,
@@ -105,9 +105,8 @@ export default async function RolePage({ params }: Props) {
 	const role = getRole((await params).slug);
 	if (!role) notFound();
 
-	const closed = isClosed();
-	// Every role shares one closing date, so once closed there are no others to list.
-	const otherRoles = closed ? [] : ROLES.filter((r) => r.slug !== role.slug);
+	const closed = isClosed(role);
+	const otherRoles = ROLES.filter((r) => r.slug !== role.slug && !isClosed(r));
 	const url = `${SITE_URL}/careers/${role.slug}`;
 
 	return (
@@ -171,7 +170,7 @@ export default async function RolePage({ params }: Props) {
 								["Location", role.sLoc],
 								["Type", role.sType],
 								["Salary", role.sSalary],
-								["Closes", CLOSES_LABEL],
+								closed ? ["Status", "Closed"] : ["Closes", CLOSES_LABEL],
 							].map(([term, detail]) => (
 								<div key={term} className="contents">
 									<dt className="text-[#4A5168]">{term}</dt>

@@ -7,10 +7,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 
-const FILTERS = ["All", ...TEAMS];
-
 export default function RolesGrid({ roles }: { roles: Role[] }) {
 	const [filter, setFilter] = useState("All");
+	const filters = [
+		"All",
+		...TEAMS.filter((team) => roles.some((r) => r.team === team)),
+	];
 	const shown = roles.filter((r) => filter === "All" || r.team === filter);
 
 	return (
@@ -20,7 +22,7 @@ export default function RolesGrid({ roles }: { roles: Role[] }) {
 				aria-label="Filter roles by team"
 				className="mt-7 mb-8 flex flex-wrap gap-2.5"
 			>
-				{FILTERS.map((label) => {
+				{filters.map((label) => {
 					const active = filter === label;
 					return (
 						<button
