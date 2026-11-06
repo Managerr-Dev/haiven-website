@@ -68,6 +68,15 @@ const fileOrNull = (formData: FormData, key: string) => {
 	return v instanceof File && v.size > 0 ? v : null;
 };
 
+const NOT_PDF_MESSAGE =
+	"That file isn’t a PDF. Save your CV as a PDF and upload it again.";
+
+/** A renamed file still ends in .pdf, so look for the PDF header near the start. */
+async function isPdf(file: File) {
+	const head = Buffer.from(await file.slice(0, 1024).arrayBuffer());
+	return head.includes("%PDF-");
+}
+
 const escapeHtml = (s: string) =>
 	s
 		.replace(/&/g, "&amp;")
@@ -151,6 +160,7 @@ export async function submitApplication(
 	const errors = validateApplication(values, role.slug);
 	const cvError = checkCv(cv);
 	if (cvError) errors.cv = cvError;
+	else if (cv && !(await isPdf(cv))) errors.cv = NOT_PDF_MESSAGE;
 	if (Object.keys(errors).length)
 		return { success: false, message: CHECK_FIELDS_MESSAGE, errors };
 
@@ -273,6 +283,7 @@ export async function joinTalentPool(
 	const cv = fileOrNull(formData, "cv");
 
 	const errors = validateTalentPool(values, cv);
+	if (cv && !errors.cv && !(await isPdf(cv))) errors.cv = NOT_PDF_MESSAGE;
 	if (Object.keys(errors).length)
 		return { success: false, message: CHECK_FIELDS_MESSAGE, errors };
 

@@ -218,18 +218,18 @@ export default function ApplicationForm({
 
 	const addPhotos = async (files: File[]) => {
 		let msg = "";
-		const ok = files.filter((f) => {
-			if (!f.type.startsWith("image/")) {
-				msg = "Only image files can be added here.";
-				return false;
-			}
-			if (f.size > MAX_FILE_BYTES) {
-				msg = `${f.name} is over 5 MB. Choose a smaller photo.`;
-				return false;
-			}
-			return true;
+		const images = files.filter((f) => {
+			if (f.type.startsWith("image/")) return true;
+			msg = "Only image files can be added here.";
+			return false;
 		});
-		let all = [...photos, ...(await Promise.all(ok.map(shrinkPhoto)))];
+		// Check size after shrinking, so large phone photos that shrink fine aren't rejected.
+		const ok = (await Promise.all(images.map(shrinkPhoto))).filter((f) => {
+			if (f.size <= MAX_FILE_BYTES) return true;
+			msg = `${f.name} is over 5 MB. Choose a smaller photo.`;
+			return false;
+		});
+		let all = [...photos, ...ok];
 		if (all.length > MAX_PHOTOS) {
 			msg = "You can add up to 4 photos. We kept the first 4.";
 			all = all.slice(0, MAX_PHOTOS);
@@ -348,7 +348,7 @@ export default function ApplicationForm({
 									<p className="text-[15px] leading-[1.6] text-[#4A5168]">
 										Fields marked{" "}
 										<span className="font-bold text-[#B42318]">*</span> are
-										required. Have your CV ready as a PDF, DOC or DOCX file.
+										required. Have your CV ready as a PDF.
 									</p>
 								</div>
 
@@ -532,14 +532,14 @@ export default function ApplicationForm({
 														Choose a file
 													</button>
 													<p className="text-sm text-[#4A5168]">
-														PDF, DOC or DOCX, up to 5 MB
+														PDF, up to 5 MB
 													</p>
 												</div>
 											)}
 											<input
 												ref={cvRef}
 												type="file"
-												accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+												accept=".pdf,application/pdf"
 												onChange={(e) => {
 													pickCv(e.target.files?.[0]);
 													e.target.value = "";

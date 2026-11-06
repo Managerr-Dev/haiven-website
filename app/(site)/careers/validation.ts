@@ -11,7 +11,7 @@ export const MAX_PHOTOS = 4;
 /** Mail servers commonly cap messages near 25 MB once attachments are base64-encoded. */
 export const MAX_TOTAL_ATTACHMENT_BYTES = 15 * 1024 * 1024;
 
-const CV_EXTENSIONS = ["pdf", "doc", "docx"];
+const CV_EXTENSIONS = ["pdf"];
 
 export interface ApplicationValues {
 	name: string;
@@ -101,7 +101,7 @@ export function checkCv(file: { name: string; size: number } | null) {
 		return "Attach your CV so we can review your experience.";
 	const ext = (file.name.split(".").pop() || "").toLowerCase();
 	if (!CV_EXTENSIONS.includes(ext))
-		return "That file type won’t work. Upload your CV as a PDF, DOC or DOCX file.";
+		return "That file type won’t work. Upload your CV as a PDF.";
 	if (file.size > MAX_FILE_BYTES)
 		return `That file is ${formatBytes(file.size)}. Upload a CV under 5 MB.`;
 	return undefined;
