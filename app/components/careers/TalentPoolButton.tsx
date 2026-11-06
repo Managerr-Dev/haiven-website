@@ -229,7 +229,7 @@ function TalentPoolDialog({ onClose }: { onClose: () => void }) {
 								<span className="break-all text-sm text-[#363C52]">
 									{cv
 										? `${cv.name} · ${formatBytes(cv.size)}`
-										: "PDF, DOC or DOCX, up to 5 MB"}
+										: "PDF, up to 5 MB"}
 								</span>
 								<button
 									type="button"
@@ -241,7 +241,7 @@ function TalentPoolDialog({ onClose }: { onClose: () => void }) {
 								<input
 									ref={cvRef}
 									type="file"
-									accept=".pdf,.doc,.docx"
+									accept=".pdf,application/pdf"
 									onChange={(e) => {
 										setCv(e.target.files?.[0] ?? null);
 										e.target.value = "";
