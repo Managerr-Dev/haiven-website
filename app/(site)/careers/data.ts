@@ -388,14 +388,13 @@ export const ROLES: Role[] = [
 			"12-month graduate programme",
 			"₦150,000–₦180,000 a month",
 			"Open to new graduates only",
-			"Applications closed",
+			`Closes ${CLOSES_LABEL}`,
 		],
 		cardImage: `${IMG}/role-customer-success-associate.jpg`,
 		photo: `${IMG}/role-customer-success-associate.jpg`,
 		photoAlt:
 			"A customer success associate on a call with the Haiven dashboard open",
 		strip: false,
-		closed: true,
 		minSalary: 150000,
 		maxSalary: 180000,
 		sections: [
@@ -557,7 +556,7 @@ export const FAQS = [
 	},
 	{
 		q: "Do I need property or tech experience?",
-		a: "It depends on the role. Each role page says exactly what we need. The Technician Trainee role is open to people starting out.",
+		a: "It depends on the role. Each role page says exactly what we need. The Technician Trainee and Customer Success roles are open to people starting out.",
 	},
 	{
 		q: "Can I apply for more than one role?",
