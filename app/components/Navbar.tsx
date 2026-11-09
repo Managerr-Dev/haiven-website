@@ -80,7 +80,10 @@ const Navbar = () => {
 						<div className="hidden lg:flex items-center gap-[18px]">
 							<Link
 								href="https://admin.haiven.net/sign-in"
-								className="text-white"
+								className={cn(
+									"transition-colors",
+									isLightPage && !isScrolled ? "text-[#3B3C3D]" : "text-white",
+								)}
 							>
 								Login
 							</Link>

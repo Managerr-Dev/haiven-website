@@ -24,7 +24,7 @@ export default function ListingCard({ offer }: { offer: ListingOffer }) {
 			href={`/listings/${offer.id}?offer=${offer.type}`}
 			className={`flex flex-col overflow-hidden rounded-[20px] border border-[#E3E7F0] bg-white transition-[box-shadow,transform] duration-200 hover:-translate-y-0.5 hover:shadow-[0_18px_40px_rgba(27,46,107,.12)] ${focusRing}`}
 		>
-			<div className="relative h-[210px]">
+			<div className="relative h-[210px] bg-[#E8EBF5]">
 				<ListingImage
 					photo={sortPhotos(offer.photos)[0]}
 					alt=""

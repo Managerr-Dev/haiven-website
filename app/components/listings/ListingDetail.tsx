@@ -277,7 +277,9 @@ function OfferView({
 						</span>
 					</p>
 					{isShortlet ? <ShortletFees offer={offer} /> : <RentCosts offer={offer} />}
-					<h2 className="text-lg font-extrabold text-[#1B2E6B]">{formTitle}</h2>
+					{!sent && (
+						<h2 className="text-lg font-extrabold text-[#1B2E6B]">{formTitle}</h2>
+					)}
 					{isShortlet ? (
 						<BookingRequestForm offer={offer} onGone={onGone} onSent={() => setSent(true)} />
 					) : (

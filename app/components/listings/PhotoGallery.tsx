@@ -53,7 +53,10 @@ export default function PhotoGallery({
 						{photos.map((photo, i) => (
 							<div
 								key={photo.id}
-								className={cn("relative min-w-0 flex-[0_0_100%]", SLIDE_HEIGHT)}
+								className={cn(
+									"relative min-w-0 flex-[0_0_100%] bg-[#E8EBF5]",
+									SLIDE_HEIGHT,
+								)}
 							>
 								<ListingImage
 									photo={photo}
