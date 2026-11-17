@@ -111,12 +111,14 @@ export function PhoneInput({
 	onChange,
 	invalid = false,
 	describedBy,
+	required = true,
 }: {
 	id: string;
 	value: string;
 	onChange: (value: string) => void;
 	invalid?: boolean;
 	describedBy?: string;
+	required?: boolean;
 }) {
 	return (
 		<div className="flex gap-2">
@@ -129,7 +131,7 @@ export function PhoneInput({
 				inputMode="tel"
 				autoComplete="tel-national"
 				placeholder="803 123 4567"
-				aria-required="true"
+				aria-required={required || undefined}
 				aria-invalid={invalid || undefined}
 				aria-describedby={describedBy}
 				value={value}
