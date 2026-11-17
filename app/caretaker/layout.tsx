@@ -35,6 +35,16 @@ export const metadata: Metadata = {
 		title: "Caretaker by Haiven — property management, on the record",
 		description:
 			"One system for records, work orders, payments, access and reporting — with a certified Caretaker on the ground when you need one.",
+		// A segment-level openGraph object replaces the root one, so the
+		// file-based app/opengraph-image.png isn't inherited — set it explicitly.
+		images: [{ url: "/opengraph-image.png", width: 3600, height: 1890 }],
+	},
+	twitter: {
+		card: "summary_large_image",
+		title: "Caretaker by Haiven — property management, on the record",
+		description:
+			"One system for records, work orders, payments, access and reporting — with a certified Caretaker on the ground when you need one.",
+		images: ["/opengraph-image.png"],
 	},
 };
 

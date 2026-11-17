@@ -34,6 +34,15 @@ export const metadata: Metadata = {
 		url: "/hlbc",
 		title,
 		description,
+		// A segment-level openGraph object replaces the root one, so the
+		// file-based app/opengraph-image.png isn't inherited — set it explicitly.
+		images: [{ url: "/opengraph-image.png", width: 3600, height: 1890 }],
+	},
+	twitter: {
+		card: "summary_large_image",
+		title,
+		description,
+		images: ["/opengraph-image.png"],
 	},
 };
 
