@@ -51,6 +51,7 @@ const Navigation = ({ className, isScrolled, variant = "navbar" }: Props) => {
 	const textColor = useDarkText ? "text-[#3B3C3D]" : "text-white";
 	const hoverBg = useDarkText ? "hover:bg-black/5" : "hover:bg-white/10";
 	const focusBg = useDarkText ? "focus:bg-black/5" : "focus:bg-white/10";
+	const itemSpacing = variant === "navbar" ? "px-2.5 xl:px-3" : "";
 
 	const showActive = variant !== "footer";
 	const activeStyle = showActive
@@ -63,13 +64,14 @@ const Navigation = ({ className, isScrolled, variant = "navbar" }: Props) => {
 		: {};
 	return (
 		<NavigationMenu className={className}>
-			<NavigationMenuList>
+			<NavigationMenuList className={variant === "navbar" ? "gap-0" : undefined}>
 				<NavigationMenuItem>
 					<NavigationMenuLink
 						asChild
 						className={cn(
 							navigationMenuTriggerStyle(),
 							"bg-transparent transition-colors",
+							itemSpacing,
 							textColor,
 							hoverBg,
 							"hover:text-current",
@@ -85,6 +87,7 @@ const Navigation = ({ className, isScrolled, variant = "navbar" }: Props) => {
 					<NavigationMenuTrigger
 						className={cn(
 							"bg-transparent transition-colors",
+							itemSpacing,
 							textColor,
 							hoverBg,
 							"hover:text-current",
@@ -114,6 +117,7 @@ const Navigation = ({ className, isScrolled, variant = "navbar" }: Props) => {
 						className={cn(
 							navigationMenuTriggerStyle(),
 							"bg-transparent transition-colors",
+							itemSpacing,
 							textColor,
 							hoverBg,
 							"hover:text-current",
@@ -131,6 +135,7 @@ const Navigation = ({ className, isScrolled, variant = "navbar" }: Props) => {
 						className={cn(
 							navigationMenuTriggerStyle(),
 							"bg-transparent transition-colors",
+							itemSpacing,
 							textColor,
 							hoverBg,
 							"hover:text-current",
@@ -148,6 +153,25 @@ const Navigation = ({ className, isScrolled, variant = "navbar" }: Props) => {
 						className={cn(
 							navigationMenuTriggerStyle(),
 							"bg-transparent transition-colors",
+							itemSpacing,
+							textColor,
+							hoverBg,
+							"hover:text-current",
+							focusBg,
+							"focus:text-current",
+						)}
+						style={pathname === "/hlbc" ? activeStyle : {}}
+					>
+						<Link href="/hlbc">HLBC</Link>
+					</NavigationMenuLink>
+				</NavigationMenuItem>
+				<NavigationMenuItem>
+					<NavigationMenuLink
+						asChild
+						className={cn(
+							navigationMenuTriggerStyle(),
+							"bg-transparent transition-colors",
+							itemSpacing,
 							textColor,
 							hoverBg,
 							"hover:text-current",
@@ -165,6 +189,7 @@ const Navigation = ({ className, isScrolled, variant = "navbar" }: Props) => {
 						className={cn(
 							navigationMenuTriggerStyle(),
 							"bg-transparent transition-colors",
+							itemSpacing,
 							textColor,
 							hoverBg,
 							"hover:text-current",

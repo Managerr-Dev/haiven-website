@@ -56,6 +56,7 @@ const MobileMenu = ({ isOpen, onClose }: MobileMenuProps) => {
 		{ title: "About Us", href: "/about-us" },
 		{ title: "IOT Solutions", href: "/iot-solutions" },
 		{ title: "Caretaker", href: "/caretaker" },
+		{ title: "HLBC", href: "/hlbc" },
 		{ title: "Contact Us", href: "/contact-us" },
 	];
 
@@ -125,6 +126,17 @@ const MobileMenu = ({ isOpen, onClose }: MobileMenuProps) => {
 					onClick={onClose}
 				>
 					Caretaker
+				</Link>
+
+				<Link
+					href="/hlbc"
+					className={cn(
+						"text-xl font-medium py-2 border-b border-white/10",
+						pathname === "/hlbc" ? "text-accent-green" : "text-white",
+					)}
+					onClick={onClose}
+				>
+					HLBC
 				</Link>
 
 				<Link

@@ -1,9 +1,15 @@
 "use server";
 
-import nodemailer from "nodemailer";
 import type { Attachment } from "nodemailer/lib/mailer";
+import {
+	escapeHtml,
+	getTransporter,
+	passesRecaptcha,
+	renderRows,
+	wrapEmail,
+	yesNo,
+} from "@/app/lib/mail";
 import { formatNigerianMobile, toNigerianMobile } from "@/app/lib/phone";
-import { verifyRecaptcha } from "@/app/lib/recaptcha";
 import { getRole, isClosed } from "./data";
 import {
 	type ApplicationValues,
@@ -29,35 +35,6 @@ const RETRY_MESSAGE =
 	"We couldn't send your application just now. Please try again in a few minutes.";
 const CHECK_FIELDS_MESSAGE = "Please check the highlighted fields and try again.";
 
-function getTransporter() {
-	const host = process.env.CAREERS_SMTP_HOST;
-	const port = Number(process.env.CAREERS_SMTP_PORT || 465);
-	const user = process.env.CAREERS_SMTP_USER;
-	const pass = process.env.CAREERS_SMTP_PASSWORD;
-	if (!host || !user || !pass) return null;
-	return {
-		user,
-		transporter: nodemailer.createTransport({
-			host,
-			port,
-			// 465 is implicit SSL; other ports (587) upgrade with STARTTLS.
-			secure: port === 465,
-			auth: { user, pass },
-		}),
-	};
-}
-
-async function passesRecaptcha(formData: FormData) {
-	// Skipped only where reCAPTCHA isn't configured (e.g. local development).
-	if (!process.env.RECAPTCHA_SECRET_KEY) return true;
-	const token = formData.get("recaptchaToken");
-	if (typeof token !== "string" || !token) return false;
-	const result = await verifyRecaptcha(token);
-	if (!result.success)
-		console.error("Careers reCAPTCHA failed:", result.error);
-	return result.success;
-}
-
 const str = (formData: FormData, key: string) => {
 	const v = formData.get(key);
 	return typeof v === "string" ? v.trim() : "";
@@ -77,14 +54,6 @@ async function isPdf(file: File) {
 	return head.includes("%PDF-");
 }
 
-const escapeHtml = (s: string) =>
-	s
-		.replace(/&/g, "&amp;")
-		.replace(/</g, "&lt;")
-		.replace(/>/g, "&gt;")
-		.replace(/"/g, "&quot;")
-		.replace(/'/g, "&#39;");
-
 const safeFilename = (name: string) =>
 	name.replace(/[^\w.\- ]+/g, "_").slice(-120) || "attachment";
 
@@ -95,32 +64,6 @@ async function toAttachment(file: File, prefix = ""): Promise<Attachment> {
 		contentType: file.type || undefined,
 	};
 }
-
-/** Label/value rows rendered as a simple email table; empty values are skipped. */
-function renderRows(rows: [string, string][]) {
-	const filled = rows.filter(([, value]) => value);
-	const html = filled
-		.map(
-			([label, value]) => `
-        <tr>
-          <td style="padding:8px 12px;border-bottom:1px solid #E3E7F0;color:#4A5168;vertical-align:top;white-space:nowrap">${escapeHtml(label)}</td>
-          <td style="padding:8px 12px;border-bottom:1px solid #E3E7F0;color:#14182B;white-space:pre-wrap">${escapeHtml(value)}</td>
-        </tr>`,
-		)
-		.join("");
-	const text = filled.map(([label, value]) => `${label}: ${value}`).join("\n");
-	return { html, text };
-}
-
-function wrapEmail(heading: string, rowsHtml: string) {
-	return `
-    <div style="font-family:Arial,sans-serif;max-width:640px;margin:0 auto;color:#14182B">
-      <h2 style="color:#1B2E6B;margin:0 0 16px">${escapeHtml(heading)}</h2>
-      <table style="width:100%;border-collapse:collapse;font-size:14px">${rowsHtml}</table>
-    </div>`;
-}
-
-const yesNo = (b: boolean) => (b ? "Yes" : "No");
 
 export async function submitApplication(
 	formData: FormData,
@@ -134,7 +77,7 @@ export async function submitApplication(
 				"This role has closed. Applications are no longer being accepted.",
 		};
 
-	if (!(await passesRecaptcha(formData)))
+	if (!(await passesRecaptcha(formData, "Careers")))
 		return {
 			success: false,
 			message: "Security verification failed. Please refresh and try again.",
@@ -266,7 +209,7 @@ export async function submitApplication(
 export async function joinTalentPool(
 	formData: FormData,
 ): Promise<CareersResult> {
-	if (!(await passesRecaptcha(formData)))
+	if (!(await passesRecaptcha(formData, "Careers")))
 		return {
 			success: false,
 			message: "Security verification failed. Please refresh and try again.",
