@@ -14,7 +14,9 @@ const jakartaSans = Plus_Jakarta_Sans({
 const jetbrainsMono = JetBrains_Mono({
 	variable: "--font-jetbrains-mono",
 	subsets: ["latin"],
-	weight: ["500", "700"],
+	// Load the variable font rather than pinned weights: Google serves pinned
+	// instances of variable fonts from /l/font?kit=… URLs, which Turbopack can't
+	// resolve, breaking the Vercel build. The variable file covers 500 and 700.
 	display: "swap",
 	fallback: ["ui-monospace", "monospace"],
 });
