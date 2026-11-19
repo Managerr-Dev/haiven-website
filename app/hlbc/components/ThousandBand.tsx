@@ -11,9 +11,9 @@ const ThousandBand = () => (
 				1,000
 			</span>
 			<h2 className="m-0 text-[clamp(30px,4.6vw,54px)] leading-[1.05] font-extrabold tracking-[-0.045em] text-balance">
-				No one needs 1,000 meters.
+				Wholesale Pricing Unlocked
 				<br />
-				<span className="text-accent-green">Together, we have them.</span>
+				<span className="text-accent-green">at 1,000 Units!</span>
 			</h2>
 			<div className="flex flex-wrap items-center justify-center gap-3 font-jetbrains text-[clamp(16px,2vw,22px)] font-bold">
 				<span className={chip}>You: 20</span>
