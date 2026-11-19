@@ -5,35 +5,33 @@ import { cn } from "@/lib/utils";
 import {
 	alonePrice,
 	fmt,
-	METER_TYPES,
+	GROUP_MINIMUM,
+	GROUP_TARGET,
+	groupPrice,
+	MAX_GROUP_ORDER,
+	METERS,
 	type MeterType,
-	POOL_MINIMUM,
-	POOL_TARGET,
-	poolPrice,
+	type Prices,
 } from "../data";
-import { MAX_QTY } from "../validation";
-import {
-	container,
-	ctaClass,
-	eyebrowClass,
-	h2Class,
-	mono,
-	sectionPadding,
-} from "./styles";
+import { useOrder } from "./OrderContext";
+import PricesAsAt from "./PricesAsAt";
+import { container, ctaClass, eyebrowClass, green, h2Class, leadClass, sectionPadding } from "./styles";
 
-const labelClass =
-	"text-[13px] font-bold tracking-[0.14em] text-[#4A5584] uppercase";
-const stepperBtn =
-	"h-[52px] w-[52px] shrink-0 cursor-pointer rounded-[14px] border-[1.5px] border-[#D5DAE8] bg-white text-2xl font-bold text-haiven-blue transition-colors hover:border-haiven-blue";
+const label = "text-[13px] font-bold tracking-[0.12em] text-[#4A5480]";
+const stepper =
+	"h-[54px] w-[54px] flex-none cursor-pointer rounded-[14px] border-none bg-white text-2xl font-extrabold text-haiven-blue";
 
-const clampQty = (n: number) => Math.max(1, Math.min(MAX_QTY, n));
+const clampQty = (n: number) => Math.max(1, Math.min(MAX_GROUP_ORDER, n));
 
-const Calculator = () => {
+type Props = { prices: Prices; asAt: string | null; today: string };
+
+const Calculator = ({ prices, asAt, today }: Props) => {
+	const { orderOnly } = useOrder();
 	const [type, setType] = useState<MeterType>("single");
-	const [qty, setQty] = useState(10);
-	// What's in the box while typing, so clearing it doesn't snap straight to 1.
-	const [qtyDraft, setQtyDraft] = useState("10");
-	const [pool, setPool] = useState(POOL_TARGET);
+	const [qty, setQty] = useState(20);
+	// The box's text while typing, so clearing it doesn't snap straight to 1.
+	const [qtyDraft, setQtyDraft] = useState("20");
+	const [pool, setPool] = useState(GROUP_TARGET);
 
 	const changeQty = (n: number) => {
 		const next = clampQty(n);
@@ -41,63 +39,74 @@ const Calculator = () => {
 		setQtyDraft(String(next));
 	};
 
-	const alone = alonePrice(type, qty);
-	const unit = Math.round(poolPrice(type, pool));
+	const alone = alonePrice(prices, type, qty);
+	const unit = Math.round(groupPrice(prices, type, pool));
+	const saving = (alone - unit) * qty;
+	const extra = Math.floor(saving / unit);
+	const meterName = type === "single" ? "single-phase meter" : "three-phase meter";
+	const [y, m, d] = today.split("-");
 
 	return (
-		<section id="saving" className="scroll-mt-[60px] bg-[#F5F7FA]">
-			<div className={`${container} ${sectionPadding} flex flex-col gap-10`}>
-				<div className="flex max-w-[720px] flex-col gap-4">
-					<p className={`${eyebrowClass} text-[#00873A]`}>Your saving</p>
+		<section id="calculator" className="scroll-mt-16 bg-white">
+			<div className={`${container} ${sectionPadding} flex flex-col gap-9`}>
+				<div className="flex flex-col gap-3.5">
+					<p className={`${eyebrowClass} ${green}`}>Your cost savings</p>
 					<h2 className={h2Class}>
-						The fuller the pool,
+						Bigger group.
 						<br />
-						<span className="text-[#00873A]">the lower the price.</span>
+						<span className={green}>Bigger savings.</span>
 					</h2>
+					<p className={leadClass}>
+						Pick your phase meter and how many you need, then slide the group size
+						to see your price and cost savings.
+					</p>
 				</div>
 
-				<div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,380px),1fr))] gap-5">
+				<div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,420px),1fr))] overflow-hidden rounded-[28px] bg-[#F5F7FA]">
 					{/* Inputs */}
-					<div className="flex flex-col gap-8 rounded-[20px] bg-white p-[clamp(22px,3vw,36px)]">
-						<div className="flex flex-col gap-3">
-							<span className={labelClass} id="meter-type-label">
-								Meter type
+					<div className="flex flex-col gap-[30px] p-[clamp(22px,3vw,40px)]">
+						<div className="flex flex-col gap-2.5">
+							<span className={label} id="calc-phase">
+								PHASE METER
 							</span>
 							<div
 								role="radiogroup"
-								aria-labelledby="meter-type-label"
-								className="grid grid-cols-2 gap-1.5 rounded-[14px] bg-[#EEF1F7] p-1.5"
+								aria-labelledby="calc-phase"
+								className="grid grid-cols-2 gap-1.5 rounded-2xl bg-[#E8EBF5] p-1.5"
 							>
-								{METER_TYPES.map((m) => (
+								{METERS.map((meter) => (
 									<button
-										key={m.value}
+										key={meter.type}
 										type="button"
 										role="radio"
-										aria-checked={type === m.value}
-										onClick={() => setType(m.value)}
+										aria-checked={type === meter.type}
+										onClick={() => setType(meter.type)}
 										className={cn(
-											"h-12 cursor-pointer rounded-[10px] text-[15px] font-bold transition-colors",
-											type === m.value
+											"flex min-h-[60px] cursor-pointer flex-col items-center justify-center gap-0.5 rounded-xl border-none p-2 transition-colors",
+											type === meter.type
 												? "bg-haiven-blue text-white"
 												: "bg-transparent text-haiven-blue hover:bg-white/60",
 										)}
 									>
-										{m.label}
+										<span className="text-base font-extrabold">{meter.short}</span>
+										<span className="text-[13px] font-medium opacity-80">
+											{meter.type === "single" ? "homes & flats" : "larger & commercial"}
+										</span>
 									</button>
 								))}
 							</div>
 						</div>
 
-						<div className="flex flex-col gap-3">
-							<label htmlFor="calc-qty" className={labelClass}>
-								Meters you need
+						<div className="flex flex-col gap-2.5">
+							<label htmlFor="calc-qty" className={label}>
+								HOW MANY METERS?
 							</label>
 							<div className="flex items-center gap-2.5">
 								<button
 									type="button"
-									aria-label="Fewer"
+									aria-label="One fewer meter"
 									onClick={() => changeQty(qty - 1)}
-									className={stepperBtn}
+									className={stepper}
 								>
 									−
 								</button>
@@ -106,7 +115,7 @@ const Calculator = () => {
 									type="number"
 									inputMode="numeric"
 									min={1}
-									max={MAX_QTY}
+									max={MAX_GROUP_ORDER}
 									value={qtyDraft}
 									onChange={(e) => {
 										setQtyDraft(e.target.value);
@@ -114,101 +123,108 @@ const Calculator = () => {
 										if (Number.isFinite(n)) setQty(clampQty(n));
 									}}
 									onBlur={() => setQtyDraft(String(qty))}
-									className={`${mono} h-[52px] min-w-0 flex-1 rounded-[14px] border-[1.5px] border-[#D5DAE8] bg-white text-center text-[22px] font-bold text-haiven-blue`}
+									className="h-[54px] min-w-0 flex-1 rounded-[14px] border-2 border-[rgba(19,36,126,0.12)] bg-white text-center font-jetbrains text-2xl font-bold text-haiven-blue"
 								/>
 								<button
 									type="button"
-									aria-label="More"
+									aria-label="One more meter"
 									onClick={() => changeQty(qty + 1)}
-									className={stepperBtn}
+									className={stepper}
 								>
 									+
 								</button>
 							</div>
-							<span className="text-sm text-[#4A5584]">
-								From 1 to 999. Buying alone, you’d pay {fmt(alone)} each.
+							<span className="text-sm text-[#4A5480]">
+								Up to {MAX_GROUP_ORDER.toLocaleString("en-NG")} per order. Need more?
+								Register and we’ll treat it as a special order.
 							</span>
 						</div>
 
-						<div className="flex flex-col gap-3">
+						<div className="flex flex-col gap-2.5">
 							<div className="flex items-baseline justify-between gap-3">
-								<label htmlFor="calc-pool" className={labelClass}>
-									Pool closes at
+								<label htmlFor="calc-pool" className={label}>
+									PAID METERS IN THE GROUP
 								</label>
-								<span className={`${mono} text-lg font-bold`}>
-									{pool.toLocaleString("en-NG")} paid
+								<span className="font-jetbrains text-xl font-bold">
+									{pool.toLocaleString("en-NG")}
 								</span>
 							</div>
 							<input
 								id="calc-pool"
 								type="range"
-								min={POOL_MINIMUM}
-								max={POOL_TARGET}
-								step={10}
+								min={GROUP_MINIMUM}
+								max={GROUP_TARGET}
+								step={50}
 								value={pool}
 								onChange={(e) => setPool(Number(e.target.value))}
-								className="h-7 w-full cursor-pointer accent-accent-green"
+								className="h-[30px] w-full cursor-pointer accent-accent-green"
 							/>
-							<div className="flex justify-between text-[13px] font-semibold text-[#4A5584]">
-								<span>300 · pool goes ahead</span>
-								<span>1,000 · full wholesale</span>
+							<div className="flex justify-between gap-3 text-[13px] font-semibold text-[#4A5480]">
+								<span>300 · group goes ahead</span>
+								<span>1,000 · wholesale price</span>
 							</div>
 						</div>
+						<p className="m-0 text-sm leading-normal text-[#4A5480]">
+							A group needs at least 300 paid meters to go ahead. Only cleared
+							payments count.
+						</p>
 					</div>
 
-					{/* Result */}
-					<div
-						aria-live="polite"
-						className="flex flex-col gap-5 rounded-[20px] bg-haiven-blue p-[clamp(22px,3vw,36px)] text-white"
-					>
-						<div className="flex flex-col gap-1">
-							<span className="text-[13px] font-bold tracking-[0.14em] text-[#C9D0F0] uppercase">
-								Price per meter
-							</span>
-							<span
-								className={`${mono} text-[clamp(34px,4.6vw,48px)] font-bold tracking-[-0.02em]`}
-							>
-								{fmt(unit)}
-							</span>
-						</div>
-						<div className="flex flex-col border-t border-[#2B3C94]">
-							<div className="flex justify-between gap-3 border-b border-[#2B3C94] py-3.5">
-								<span className="font-semibold text-[#C9D0F0]">Buying alone</span>
-								<span
-									className={`${mono} font-medium line-through decoration-[#FF6B6B]`}
-								>
-									{fmt(alone * qty)}
+					{/* Receipt */}
+					<div className="flex flex-col gap-5 bg-haiven-blue p-[clamp(22px,3vw,40px)]">
+						<div
+							aria-live="polite"
+							className="relative flex flex-col gap-3 rounded-md bg-white px-[26px] pt-7 pb-[26px] font-jetbrains text-haiven-blue shadow-[0_30px_50px_-20px_rgba(0,0,0,0.5)]"
+						>
+							<div className="flex justify-between gap-3 text-xs font-bold tracking-[0.12em] text-[#4A5480]">
+								<span>HLBC · GROUP PURCHASE</span>
+								<span>
+									{d}.{m}.{y}
 								</span>
 							</div>
-							<div className="flex justify-between gap-3 border-b border-[#2B3C94] py-3.5">
-								<span className="font-semibold text-[#C9D0F0]">
-									Through the pool
+							<div className="border-t-2 border-dashed border-[#D5DAE8]" />
+							<div className="flex justify-between gap-3 text-[15px] font-medium">
+								<span>
+									{qty} × {meterName}
 								</span>
-								<span className={`${mono} font-bold`}>{fmt(unit * qty)}</span>
+								<span>{fmt(unit)} ea.</span>
 							</div>
-						</div>
-						<div className="mt-auto flex flex-col gap-1">
-							<span className={`${mono} text-sm font-bold tracking-[0.18em]`}>
-								YOU KEEP
+							<div className="flex justify-between gap-3 text-[15px] font-medium text-[#4A5480]">
+								<span>Retail (buying alone)</span>
+								<span className="line-through decoration-[#D03B3B]">{fmt(alone * qty)}</span>
+							</div>
+							<div className="flex justify-between gap-3 text-[15px] font-bold">
+								<span>Group purchase</span>
+								<span>{fmt(unit * qty)}</span>
+							</div>
+							<div className="border-t-2 border-dashed border-[#D5DAE8]" />
+							<span className="text-[13px] font-bold tracking-[0.18em]">COST SAVINGS</span>
+							<span className="font-jakarta text-[clamp(44px,6vw,64px)] leading-none font-extrabold tracking-[-0.045em] text-[#00873A]">
+								{fmt(saving)}
 							</span>
-							<span className="text-[clamp(44px,6.4vw,68px)] leading-none font-extrabold tracking-[-0.04em] text-accent-green">
-								{fmt((alone - unit) * qty)}
-							</span>
+							{extra >= 1 && (
+								<div className="mt-1 -rotate-6 self-end rounded-[10px] border-[3px] border-[#00873A] px-3.5 py-2 text-center text-sm leading-[1.3] font-bold tracking-[0.06em] text-[#00873A]">
+									ENOUGH FOR
+									<br />
+									<span className="text-xl">
+										+{extra} MORE METER{extra === 1 ? "" : "S"}
+									</span>
+								</div>
+							)}
 						</div>
+						<p className="m-0 text-[13px] leading-[1.55] text-[#C9D0F0]">
+							Illustrative. <PricesAsAt asAt={asAt} /> Your final price is set on
+							paid meters when your group closes, subject to supplier confirmation.
+						</p>
 						<a
 							href="#register"
-							className={`${ctaClass} self-start px-6 py-3.5 text-[17px]`}
+							onClick={() => orderOnly(type, qty)}
+							className={`${ctaClass} self-start px-[26px] py-[15px] text-[17px]`}
 						>
-							Register free <span aria-hidden="true">→</span>
+							Register for these meters <span aria-hidden="true">→</span>
 						</a>
 					</div>
 				</div>
-
-				<p className="m-0 max-w-[760px] text-sm leading-[1.55] text-[#4A5584]">
-					Estimate, per meter, excluding VAT and courier. Only cleared payments
-					count toward the pool. Final prices are confirmed by Haiven after
-					provisional closure and are subject to supplier confirmation.
-				</p>
 			</div>
 		</section>
 	);

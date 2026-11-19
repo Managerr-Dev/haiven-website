@@ -1,185 +1,224 @@
 /**
- * Prices and copy for the Haiven Leverage Buying Club (HLBC) landing page.
+ * Prices and copy for the Haiven Leverage Buying Club (HLBC) group purchase page.
  *
  * Prices are per meter in naira, excluding VAT and courier:
- * [1–99 meters, 100–999 meters, 1,000+ wholesale target].
+ * [1–99 meters, 100–999 meters, 1,000+ wholesale].
+ * Live prices and groups come from the Haiven Admin API (see lib/state.ts).
  */
 
 export type MeterType = "single" | "three";
 
-export const PRICES: Record<MeterType, [number, number, number]> = {
+export type Prices = Record<MeterType, [number, number, number]>;
+
+/** Used only when the API can't be reached. */
+export const FALLBACK_PRICES: Prices = {
 	single: [112_000, 105_000, 95_000],
 	three: [220_000, 207_000, 190_000],
 };
 
-/** Pools go ahead at this many paid meters; the full wholesale price applies at the target. */
-export const POOL_MINIMUM = 300;
-export const POOL_TARGET = 1_000;
+/** Groups go ahead at this many paid meters; the full wholesale price applies at the target. */
+export const GROUP_MINIMUM = 300;
+export const GROUP_TARGET = 1_000;
+
+/** Most meters one order can put into a group; larger orders are special orders. */
+export const MAX_GROUP_ORDER = 1_000;
 
 export const fmt = (n: number) => "₦" + Math.round(n).toLocaleString("en-NG");
 
+/** "₦95k" */
+export const fmtK = (n: number) =>
+	"₦" + (n >= 1000 ? `${Math.round(n / 1000).toLocaleString("en-NG")}k` : n);
+
+/** "17 Nov 2026" from an ISO date or date-time. */
+export const fmtDate = (iso: string) =>
+	new Intl.DateTimeFormat("en-GB", {
+		day: "numeric",
+		month: "short",
+		year: "numeric",
+		timeZone: "Africa/Lagos",
+	}).format(new Date(iso));
+
 /**
- * Pool price for `paid` cleared meters:
- * 100–999 price − (100–999 price − 1,000+ price) × paid ÷ 1,000.
+ * Group price for `paid` meters:
+ * 100–999 price − (100–999 price − wholesale price) × paid ÷ 1,000.
  */
-export function poolPrice(type: MeterType, paid: number) {
-	const [, mid, target] = PRICES[type];
-	return paid >= POOL_TARGET ? target : mid - ((mid - target) * paid) / POOL_TARGET;
+export function groupPrice(prices: Prices, type: MeterType, paid: number) {
+	const [, mid, wholesale] = prices[type];
+	return paid >= GROUP_TARGET
+		? wholesale
+		: mid - ((mid - wholesale) * paid) / GROUP_TARGET;
 }
 
-/** What a buyer pays without the pool: the 1–99 or 100–999 tier. */
-export const alonePrice = (type: MeterType, qty: number) =>
-	qty < 100 ? PRICES[type][0] : PRICES[type][1];
+/** What a buyer pays alone: the 1–99 or 100–999 price. */
+export const alonePrice = (prices: Prices, type: MeterType, qty: number) =>
+	qty < 100 ? prices[type][0] : prices[type][1];
 
-export const METER_TYPES: { value: MeterType; label: string }[] = [
-	{ value: "single", label: "Single-phase" },
-	{ value: "three", label: "Three-phase" },
+/** Biggest per-meter saving across both meters, retail vs wholesale. */
+export const maxSaving = (prices: Prices) =>
+	Math.max(...Object.values(prices).map(([retail, , wholesale]) => retail - wholesale));
+
+export const METERS: { type: MeterType; name: string; short: string; use: string }[] = [
+	{
+		type: "single",
+		name: "Single-phase meter",
+		short: "Single-phase",
+		use: "Homes, flats and rentals",
+	},
+	{
+		type: "three",
+		name: "Three-phase meter",
+		short: "Three-phase",
+		use: "Larger homes, offices and commercial",
+	},
 ];
 
-export const LADDERS = [
-	{
-		type: "single" as const,
-		name: "Single-phase GPRS smart meter",
-		use: "Homes, flats and single-phase installations",
-	},
-	{
-		type: "three" as const,
-		name: "Three-phase GPRS smart meter",
-		use: "Larger homes, commercial and three-phase installations",
-	},
-].map((m) => {
-	const [t1, t2, t3] = PRICES[m.type];
-	return { ...m, t1, t2, t3, save: t1 - t3 };
-});
-
-/** Rows of the illustrative price table. */
+/** Rows of the pricing table. */
 export const TABLE_TIERS = [300, 500, 700, 900, 1_000];
 
 export const STEPS: [title: string, body: string][] = [
 	[
-		"Register free",
-		"Pick your meter type and quantity. Add optional boxes or breakers. No payment yet.",
+		"Join free",
+		"Pick your phase meter and how many you need. Add optional meter boxes or breakers if you want them. Nothing to pay yet.",
 	],
+	["The group fills", "Each phase meter has its own group, open for up to 21 days."],
 	[
-		"Join a pool",
-		"Each pool is open for up to 21 days. Only cleared payments count toward it.",
-	],
-	[
-		"Provisional price notice",
-		"When the pool provisionally closes, we tell you the pool size and your provisional price.",
+		"Get your price",
+		"When the group closes, Haiven sends your provisional price, VAT and payment date.",
 	],
 	[
 		"Pay 50%",
-		"Within 7 days of provisional closure. Haiven then confirms the final price.",
+		"Within 7 days of that notice. Haiven reconciles paid meters and confirms your final wholesale price.",
 	],
 	[
 		"Pay balance and courier",
-		"Before dispatch, you pay the remaining balance and courier charges.",
+		"The remaining 50% and the courier charge are paid before dispatch.",
 	],
 	[
 		"Receive your meters",
-		"Shipping takes an estimated 10 weeks from supplier order confirmation.",
+		"Shipping and clearing takes about 10 weeks from supplier order confirmation, then courier delivery to you.",
 	],
 ];
 
 export const SAFEGUARDS: [title: string, body: string][] = [
 	[
-		"Ring-fenced funds",
-		"Pool payments are held separately and used only for that pool’s order.",
+		"Ring-fenced group funds",
+		"Each group’s money is kept for that group’s procurement.",
 	],
-	["300 minimum", "A pool only goes ahead once it reaches 300 paid meters."],
 	[
-		"Refunds within 7 business days",
-		"If a pool falls short, transfer to the next pool or request a refund. Approved refunds are paid within 7 business days.",
+		"300-meter minimum",
+		"No group goes ahead below 300 paid meters. If yours falls short, move to the next group or request a refund.",
+	],
+	[
+		"Refunds in 7 business days",
+		"Approved refunds are paid within 7 business days, after payment reconciliation.",
 	],
 	[
 		"Price confirmed first",
-		"You see the provisional price before paying, and Haiven confirms the final price after your deposit.",
+		"Your final price is shared before procurement. A material change needs your acceptance.",
 	],
 	[
-		"Only cleared payments count",
-		"Registrations don’t move the pool. Paid meters do, so the count is real.",
+		"Your price is set by paid meters",
+		"While a group is open you see how many meters have joined. Your final price is based only on paid meters, so the price is real.",
 	],
 	[
-		"No substitution without approval",
-		"You get the meter you registered for, unless you approve a change.",
+		"No surprise substitutions",
+		"Any product change needs your approval. Manufacturer warranties come with your order.",
 	],
 ];
 
 export const FEATURES: [title: string, body: string][] = [
 	[
-		"GPRS communication",
-		"Readings and events travel over the mobile network, so there are no site visits to read meters.",
-	],
-	["Prepaid by keypad", "Tenants enter credit tokens on the built-in keypad."],
-	[
-		"Live usage and credit",
-		"The display shows consumption, remaining credit and status lights.",
-	],
-	["Tamper alerts", "Cover opening and bypass attempts are flagged by the meter."],
-	[
-		"Remote management",
-		"Readings, tariffs and supply control can be handled from a central platform.",
+		"Remote GPRS communication",
+		"Meter data travels over the mobile network, so readings don’t need a site visit.",
 	],
 	[
-		"Certified build",
-		"IEC 62052-11 and IEC 62053-21 compliant, in an IP54 enclosure.",
+		"Remote reading and monitoring",
+		"See readings and consumption remotely on compatible platforms.",
+	],
+	[
+		"Digital electricity vending",
+		"Buy power through digital channels, with remote loading on compatible configurations.",
+	],
+	[
+		"Tamper and event records",
+		"Supported models record selected tamper events and meter activity.",
+	],
+	[
+		"Manage many meters at once",
+		"Owners and facility managers run every registered meter from one place.",
+	],
+	[
+		"Ready for Haiven",
+		"Connect to the free Haiven app for management, monitoring and vending.",
 	],
 ];
 
 export const FAQS: [question: string, answer: string][] = [
 	[
-		"Is registration really free?",
-		"Yes. Registering is free and non-binding. You only pay once your pool provisionally closes and you’ve seen the provisional price.",
+		"Do I have to buy 1,000 meters to get the wholesale price?",
+		"No. Haiven combines orders from many buyers into one group purchase. You register your own quantity and pay the price the group achieves.",
 	],
 	[
-		"I only need one meter. Can I still join?",
-		"Yes. Every buyer in a pool pays the same price per meter, whether you need one meter or hundreds.",
+		"Are prices fixed?",
+		"No. Prices are live and change with the market, for example with exchange rates and supplier costs. Your provisional price is set when your group closes, and the final price is confirmed before procurement.",
+	],
+	["Is joining free?", "Yes. Joining is free, and registering does not commit you to buy."],
+	[
+		"Is the Haiven app really free?",
+		"Yes, for property owners and managers: meter registration, monitoring and management are free, and so is the app residents use to buy power. When residents buy electricity through the app, a 1% fee applies to the amount they buy.",
 	],
 	[
-		"When do I pay?",
-		"You pay 50% within 7 days of provisional closure. The balance and courier charges are paid before dispatch.",
+		"Are single-phase and three-phase meters in the same group?",
+		"No. Each phase meter has its own group purchase.",
 	],
 	[
-		"What if the pool doesn’t reach 300 paid meters?",
-		"The pool doesn’t go ahead. You can transfer to the next pool or request a refund. Approved refunds are paid within 7 business days.",
+		"What is the minimum for a group to go ahead?",
+		"300 paid meters of the same phase. At 1,000 paid meters the full wholesale price applies, subject to supplier and procurement confirmation.",
 	],
 	[
-		"Is the price guaranteed?",
-		"Prices on this page are illustrative. Haiven confirms the final price after provisional closure, subject to supplier confirmation.",
+		"Do I pay the full amount when I register?",
+		"No. After your group closes you have 7 days from the provisional notice to pay 50% of your VAT-inclusive order. The remaining 50% is paid before dispatch.",
 	],
 	[
-		"How long does delivery take?",
-		"Shipping takes an estimated 10 weeks from supplier order confirmation. Courier within Nigeria is charged separately.",
+		"What if the group doesn’t reach 300 paid meters?",
+		"Procurement doesn’t go ahead. You can move your payment to the next group for the same phase meter or request a refund. Approved refunds are paid within 7 business days.",
 	],
 	[
-		"Are meter boxes and breakers included?",
-		"No. They’re optional, quoted on request and kept outside the pool price.",
+		"I need more than 1,000 meters. Can I still join?",
+		"Yes. Orders above 1,000 meters are handled as special orders, outside the group. Register as normal and our team will contact you about pricing.",
 	],
 	[
-		"Can I mix single-phase and three-phase?",
-		"Yes. You can register for both. Each meter type runs its own pool and price.",
+		"Are meter boxes and circuit breakers included?",
+		"No. They are optional, quoted separately on request, and not counted in the group or its savings.",
+	],
+	[
+		"Is delivery free for large orders?",
+		"No. Every order goes by courier, and you pay the delivery charge, whatever the quantity or location. It is quoted for your acceptance before dispatch.",
+	],
+	[
+		"How long until I receive my meters?",
+		"Shipping and clearing takes about 10 weeks from supplier order confirmation, after the group’s payments are in. This is an estimate, not a guaranteed date, and it doesn’t start at registration.",
+	],
+	[
+		"Can I order for several properties?",
+		"Yes. Register the total number of meters you need across your properties.",
 	],
 ];
 
+/** Values match the API's HlbcBuyerType enum. */
 export const BUYER_TYPES = [
+	{ value: "property_developer", label: "Property developer" },
+	{ value: "property_owner", label: "Property owner or landlord" },
+	{ value: "estate_manager", label: "Estate or facility manager" },
 	{ value: "homeowner", label: "Homeowner" },
-	{ value: "landlord", label: "Landlord or property manager" },
-	{ value: "estate", label: "Estate or facility manager" },
-	{ value: "developer", label: "Developer" },
-	{ value: "business", label: "Business" },
-	{ value: "installer", label: "Installer or electrician" },
+	{ value: "electrical_contractor", label: "Electrical contractor" },
+	{ value: "business_owner", label: "Business owner" },
 	{ value: "other", label: "Other" },
 ];
 
-export const ACCESSORIES = [
-	{ value: "none", label: "No, meters only" },
-	{ value: "boxes", label: "Meter boxes" },
-	{ value: "breakers", label: "Circuit breakers" },
-	{ value: "both", label: "Boxes and breakers" },
-];
-
+/** Lagos first, then alphabetical. Must match the API's config('hlbc.states'). */
 export const STATES = [
+	"Lagos",
 	"Abia",
 	"Adamawa",
 	"Akwa Ibom",
@@ -204,7 +243,6 @@ export const STATES = [
 	"Kebbi",
 	"Kogi",
 	"Kwara",
-	"Lagos",
 	"Nasarawa",
 	"Niger",
 	"Ogun",
@@ -218,8 +256,3 @@ export const STATES = [
 	"Yobe",
 	"Zamfara",
 ];
-
-export const labelFor = (
-	options: { value: string; label: string }[],
-	value: string,
-) => options.find((o) => o.value === value)?.label ?? value;

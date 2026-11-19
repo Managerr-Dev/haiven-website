@@ -1,21 +1,16 @@
-import { fmt, PRICES } from "../data";
-import { ctaClass, mono } from "./styles";
+import { fmtK, type Prices } from "../data";
 
-/** Bottom call-to-action bar, shown on narrow screens only. */
-const StickyCta = () => (
-	<div className="min-[820px]:hidden">
-		{/* Spacer so the bar never covers the end of the footer. */}
-		<div className="h-20 bg-[#0D1A5E]" />
-		<div className="fixed inset-x-0 bottom-0 z-60 flex items-center gap-3 border-t border-[#2B3C94] bg-[#0D1A5E] px-4 pt-3 pb-[calc(12px+env(safe-area-inset-bottom))]">
-			<div className="flex flex-1 flex-col leading-[1.2] text-white">
-				<span className="text-xs font-semibold text-[#C9D0F0]">As low as</span>
-				<span className={`${mono} text-[17px] font-bold`}>
-					{fmt(PRICES.single[2])}
-					<span className="text-xs text-[#C9D0F0]"> /meter</span>
-				</span>
-			</div>
-			<a href="#register" className={`${ctaClass} px-[22px] py-[13px] text-base`}>
-				Register free →
+/** Bottom call-to-action, shown on narrow screens only. */
+const StickyCta = ({ prices }: { prices: Prices }) => (
+	<div className="min-[900px]:hidden">
+		{/* Spacer so the button never covers the end of the footer. */}
+		<div className="h-[84px] bg-[#0D1A5E]" />
+		<div className="fixed inset-x-3 bottom-[calc(12px+env(safe-area-inset-bottom))] z-60">
+			<a
+				href="#register"
+				className="flex justify-center rounded-full bg-accent-green px-5 py-4 text-[17px] font-extrabold text-haiven-blue no-underline shadow-[0_12px_30px_rgba(0,0,0,0.3)]"
+			>
+				Register free · wholesale from {fmtK(prices.single[2])}
 			</a>
 		</div>
 	</div>

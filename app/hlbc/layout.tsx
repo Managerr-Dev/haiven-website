@@ -3,6 +3,7 @@ import { JetBrains_Mono, Plus_Jakarta_Sans } from "next/font/google";
 import HlbcFooter from "./components/HlbcFooter";
 import HlbcHeader from "./components/HlbcHeader";
 import StickyCta from "./components/StickyCta";
+import { getHlbcState } from "./lib/state";
 
 const jakartaSans = Plus_Jakarta_Sans({
 	variable: "--font-jakarta-sans",
@@ -21,9 +22,9 @@ const jetbrainsMono = JetBrains_Mono({
 	fallback: ["ui-monospace", "monospace"],
 });
 
-const title = "Haiven Leverage Buying Club — smart meters at pool prices";
+const title = "Haiven Group Purchase: Smart meters at wholesale price | HLBC";
 const description =
-	"Join the HLBC pool and pay as low as the 1,000-meter price for GPRS smart meters, even if you only need one. Free, non-binding registration.";
+	"Join a Haiven group purchase and get smart phase meters at the wholesale price, even if you only need one. Free to join, nothing to pay until your group closes.";
 
 export const metadata: Metadata = {
 	title: { absolute: title },
@@ -46,17 +47,19 @@ export const metadata: Metadata = {
 	},
 };
 
-export default function HlbcLayout({
+export default async function HlbcLayout({
 	children,
 }: Readonly<{ children: React.ReactNode }>) {
+	const { prices, pricesAsAt } = await getHlbcState();
+
 	return (
 		<div
 			className={`${jakartaSans.variable} ${jetbrainsMono.variable} min-h-screen bg-[#F5F7FA] font-jakarta text-haiven-blue antialiased`}
 		>
 			<HlbcHeader />
 			<main>{children}</main>
-			<HlbcFooter />
-			<StickyCta />
+			<HlbcFooter asAt={pricesAsAt} />
+			<StickyCta prices={prices} />
 		</div>
 	);
 }
