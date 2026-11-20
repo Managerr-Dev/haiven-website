@@ -22,17 +22,17 @@ const jetbrainsMono = JetBrains_Mono({
 	fallback: ["ui-monospace", "monospace"],
 });
 
-const title = "Haiven Group Purchase: Smart meters at wholesale price | HLBC";
+const title = "Haiven Group Buy: Smart meters at wholesale price";
 const description =
 	"Join a Haiven group purchase and get smart phase meters at the wholesale price, even if you only need one. Free to join, nothing to pay until your group closes.";
 
 export const metadata: Metadata = {
 	title: { absolute: title },
 	description,
-	alternates: { canonical: "/hlbc" },
+	alternates: { canonical: "/group-buy" },
 	openGraph: {
 		type: "website",
-		url: "/hlbc",
+		url: "/group-buy",
 		title,
 		description,
 		// A segment-level openGraph object replaces the root one, so the

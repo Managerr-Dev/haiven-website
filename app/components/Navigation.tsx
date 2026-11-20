@@ -38,6 +38,26 @@ const features = [
 	},
 ];
 
+const smartMeters = [
+	{
+		title: "Group buy",
+		href: "/group-buy",
+	},
+	// No dedicated pages yet; these point to the group buy page for now.
+	{
+		title: "Energy Metering",
+		href: "/group-buy",
+	},
+	{
+		title: "Gas Metering",
+		href: "/group-buy",
+	},
+	{
+		title: "Water Metering",
+		href: "/group-buy",
+	},
+];
+
 interface Props extends NavigationMenuProps {
 	isScrolled?: boolean;
 	variant?: "navbar" | "footer";
@@ -148,22 +168,32 @@ const Navigation = ({ className, isScrolled, variant = "navbar" }: Props) => {
 					</NavigationMenuLink>
 				</NavigationMenuItem>
 				<NavigationMenuItem>
-					<NavigationMenuLink
-						asChild
+					<NavigationMenuTrigger
 						className={cn(
-							navigationMenuTriggerStyle(),
 							"bg-transparent transition-colors",
 							itemSpacing,
 							textColor,
 							hoverBg,
 							"hover:text-current",
-							focusBg,
-							"focus:text-current",
+							"data-[state=open]:bg-white/10",
+							"data-[state=open]:text-current",
+							useDarkText && "data-[state=open]:bg-black/5",
 						)}
-						style={pathname === "/hlbc" ? activeStyle : {}}
+						style={
+							smartMeters.some((item) => pathname === item.href)
+								? activeStyle
+								: {}
+						}
 					>
-						<Link href="/hlbc">HLBC</Link>
-					</NavigationMenuLink>
+						Smart Meters
+					</NavigationMenuTrigger>
+					<NavigationMenuContent>
+						<ul className="grid w-[400px] gap-2 max-w-[300px]">
+							{smartMeters.map((item) => (
+								<ListItem key={item.title} title={item.title} href={item.href} />
+							))}
+						</ul>
+					</NavigationMenuContent>
 				</NavigationMenuItem>
 				<NavigationMenuItem>
 					<NavigationMenuLink

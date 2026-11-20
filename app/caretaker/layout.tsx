@@ -6,7 +6,7 @@ import CaretakerHeader from "./components/CaretakerHeader";
 const alanSans = Alan_Sans({
 	variable: "--font-alan-sans",
 	subsets: ["latin"],
-	// Variable font (300–900) instead of pinned weights; see app/hlbc/layout.tsx.
+	// Variable font (300–900) instead of pinned weights; see app/group-buy/layout.tsx.
 	display: "swap",
 	// Alan Sans has no entry in Next's font-metrics database, so it can't
 	// synthesise a size-adjusted fallback ("Failed to find font override

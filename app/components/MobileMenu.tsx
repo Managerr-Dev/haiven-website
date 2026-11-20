@@ -35,6 +35,26 @@ const features = [
 	},
 ];
 
+const smartMeters = [
+	{
+		title: "Group buy",
+		href: "/group-buy",
+	},
+	// No dedicated pages yet; these point to the group buy page for now.
+	{
+		title: "Energy Metering",
+		href: "/group-buy",
+	},
+	{
+		title: "Gas Metering",
+		href: "/group-buy",
+	},
+	{
+		title: "Water Metering",
+		href: "/group-buy",
+	},
+];
+
 interface MobileMenuProps {
 	isOpen: boolean;
 	onClose: () => void;
@@ -56,7 +76,7 @@ const MobileMenu = ({ isOpen, onClose }: MobileMenuProps) => {
 		{ title: "About Us", href: "/about-us" },
 		{ title: "IOT Solutions", href: "/iot-solutions" },
 		{ title: "Caretaker", href: "/caretaker" },
-		{ title: "HLBC", href: "/hlbc" },
+		{ title: "Group buy", href: "/group-buy" },
 		{ title: "Contact Us", href: "/contact-us" },
 	];
 
@@ -128,16 +148,35 @@ const MobileMenu = ({ isOpen, onClose }: MobileMenuProps) => {
 					Caretaker
 				</Link>
 
-				<Link
-					href="/hlbc"
-					className={cn(
-						"text-xl font-medium py-2 border-b border-white/10",
-						pathname === "/hlbc" ? "text-accent-green" : "text-white",
-					)}
-					onClick={onClose}
-				>
-					HLBC
-				</Link>
+				<Accordion type="single" collapsible className="w-full">
+					<AccordionItem
+						value="smart-meters"
+						className="border-b border-white/10"
+					>
+						<AccordionTrigger className="text-xl font-medium text-white hover:no-underline py-2">
+							Smart Meters
+						</AccordionTrigger>
+						<AccordionContent>
+							<div className="flex flex-col space-y-3 pl-4 pt-2">
+								{smartMeters.map((item) => (
+									<Link
+										key={item.title}
+										href={item.href}
+										className={cn(
+											"text-lg text-white/70 hover:text-white transition-colors",
+											// Several items share a page; only highlight the first match.
+											smartMeters.find((m) => m.href === pathname) === item &&
+												"text-accent-green",
+										)}
+										onClick={onClose}
+									>
+										{item.title}
+									</Link>
+								))}
+							</div>
+						</AccordionContent>
+					</AccordionItem>
+				</Accordion>
 
 				<Link
 					href="/contact-us"
