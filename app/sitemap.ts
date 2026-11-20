@@ -9,7 +9,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
 		{ url: `${baseUrl}/caretaker`, priority: 0.9 },
 
-		{ url: `${baseUrl}/hlbc`, priority: 0.9 },
+		{ url: `${baseUrl}/group-buy`, priority: 0.9 },
 
 		{ url: `${baseUrl}/iot-solutions`, priority: 0.9 },
 

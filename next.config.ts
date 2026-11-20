@@ -8,6 +8,12 @@ const nextConfig: NextConfig = {
 			bodySizeLimit: "16mb",
 		},
 	},
+	async redirects() {
+		return [
+			// HLBC was renamed to Group buy; keep old links and search results working.
+			{ source: "/hlbc", destination: "/group-buy", permanent: true },
+		];
+	},
 	images: {
 		remotePatterns: [
 			{
